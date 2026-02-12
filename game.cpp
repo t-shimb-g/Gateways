@@ -1,20 +1,28 @@
 #include "game.h"
 
 Game::Game(std::string title, int width, int height)
-    : graphics{title, width, height}, dt{1.0/60.0}, lag{0.0},
+    : graphics{title, width, height}, world{31, 11}, camera{graphics, 64},
+    dt{1.0/60.0}, lag{0.0},
     performance_frequency{SDL_GetPerformanceFrequency()}, prev_counter{SDL_GetPerformanceCounter()} {
 
     // load the first "level"
-    world.add_platform(0, 656, 1280, 64);
-    world.add_platform(200, 450, 400, 64);
-    world.add_platform(600, 200, 250, 64);
-    world.add_platform(0, 0, 64, 720);
-    world.add_platform(1216, 0, 64, 720);
+    // boundary walls
+    world.add_platform(0, 0, 30, 1);
+    world.add_platform(0, 0, 1, 10);
+    world.add_platform(30, 0, 1, 10);
+    world.add_platform(0, 10, 31, 1);
+
+    //platforms
+    world.add_platform(3, 7, 4, 1);
+    world.add_platform(13, 4, 6, 1);
+
     player = world.create_player();
+    camera.set_location(player->position);
 }
 
 void Game::input() {
     player->handle_input();
+    camera.handle_input();
 }
 
 void Game::update() {
@@ -23,6 +31,10 @@ void Game::update() {
     prev_counter = now;
     while (lag >= dt) {
         world.update(dt);
+        // put the camera lightly ahead of the player
+        float L = length(player->velocity);
+        Vec<float> displacement = 8.0f * player->velocity / (1.0f + L);
+        camera.update(player->position + displacement, dt);
         lag -= dt;
     }
 }
@@ -32,11 +44,11 @@ void Game::render() {
     graphics.clear();
 
     // draw the world
-    for (auto platform : world.get_platforms()) {
-        graphics.draw(platform, {0, 255, 0, 255});
-    }
-    auto [player_sprite, color] = player->get_sprite();
-    graphics.draw(player_sprite, color);
+    camera.render(world.tilemap);
+
+    // dray the player
+    auto [player_position, color] = player->get_sprite();
+    camera.render(player_position, color);
 
     // update
     graphics.update();

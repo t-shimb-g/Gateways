@@ -1,6 +1,7 @@
 #pragma once
 #include "player.h"
 #include "world.h"
+#include "camera.h"
 
 class Game {
 public:
@@ -11,8 +12,9 @@ public:
 
 private:
     Player* player;
-    World world;
     Graphics graphics;
+    World world;
+    Camera camera;
 
     // timing
     double dt;
