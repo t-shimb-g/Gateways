@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(gateways)
+project(classgame)
 
 set(CMAKE_CXX_STANDARD 20)
 add_compile_options(-g -Wall -Wextra -pedantic)
@@ -46,12 +46,11 @@ FetchContent_MakeAvailable(SDL SDL_mixer)
 add_subdirectory(utils)
 add_subdirectory(graphics)
 add_subdirectory(world)
-add_subdirectory(game_objects)
 
 add_library(game_lib
-    game.cpp game.h
+        game.cpp game.h
 )
 
-target_link_libraries(game_lib PUBLIC SDL3::SDL3 graphics world game_objects utils)
+target_link_libraries(game_lib PUBLIC SDL3::SDL3 graphics world utils)
 add_executable(game main.cpp)
 target_link_libraries(game PUBLIC game_lib)

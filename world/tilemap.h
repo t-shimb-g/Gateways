@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-enum class Tile{ Open, Platform };
+enum class Tile{ Open, Platform};
 
 class Tilemap {
 public:
@@ -13,6 +13,7 @@ public:
 
     const int width;
     const int height;
+
 private:
     std::vector<Tile> tiles;
 

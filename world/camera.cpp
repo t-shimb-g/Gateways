@@ -1,10 +1,9 @@
 #include "camera.h"
-
 #include "graphics.h"
 #include "physics.h"
 
 Camera::Camera(Graphics& graphics, float tilesize)
-    : graphics{graphics}, tilesize{tilesize}, grid_toggle{} {
+    : graphics{graphics}, tilesize{tilesize} {
     calculate_visible_tiles();
 }
 
@@ -18,14 +17,14 @@ void Camera::handle_input() {
 
 void Camera::calculate_visible_tiles() {
     Vec<int> num_tiles = Vec{graphics.width, graphics.height} / (2 * static_cast<int>(tilesize)) + Vec{1, 1};
-    Vec<int> center(static_cast<int>(location.x), static_cast<int>(location.y));
+    Vec<int> center(static_cast<int>(physics.position.x), static_cast<int>(physics.position.y));
     visible_max = center + num_tiles;
     visible_min = center - num_tiles;
 }
 
 Vec<float> Camera::world_to_screen(const Vec<float>& world_position) const {
     // world coordinates (pos y is up) -> screen coordinates (pos y is down)
-    Vec<float> pixel = (world_position - location) * static_cast<float>(tilesize);
+    Vec<float> pixel = (world_position - physics.position) * static_cast<float>(tilesize);
 
     // shift to center of screen
     pixel += Vec<float>{graphics.width / 2.0f, graphics.height / 2.0f};
@@ -37,18 +36,18 @@ Vec<float> Camera::world_to_screen(const Vec<float>& world_position) const {
 }
 
 void Camera::set_location(const Vec<float>& new_location) {
-    location = new_location;
+    physics.position = new_location;
     calculate_visible_tiles();
 }
 
 void Camera::update(const Vec<float>& new_location, float dt) {
     goal = new_location;
-    acceleration = (goal - location) * 10.0f;
+    physics.acceleration = (goal - physics.position) * 20.0f;
 
-    velocity += 0.5f * acceleration * dt;
-    location += velocity * dt;
-    velocity += 0.5f * acceleration * dt;
-    velocity *= {damping, damping};
+    physics.velocity += 0.5f * physics.acceleration * dt;
+    physics.position += physics.velocity * dt;
+    physics.velocity += 0.5f * physics.acceleration * dt;
+    physics.velocity *= {physics.damping, physics.damping};
 
     calculate_visible_tiles();
 }

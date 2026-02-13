@@ -3,6 +3,7 @@
 #include "tilemap.h"
 #include "vec.h"
 #include "toggle.h"
+#include "physics.h"
 
 class Graphics;
 class Color;
@@ -22,10 +23,10 @@ public:
 private:
     Graphics& graphics;
     float tilesize;
-    Vec<float> location;
+    Physics physics;
     Toggle grid_toggle;
 
     void calculate_visible_tiles();
     Vec<int> visible_min, visible_max;
-    Vec<float> goal, velocity, acceleration;
+    Vec<float> goal;
 };
