@@ -5,6 +5,9 @@ add_library(world
         tilemap.cpp tilemap.h
         camera.cpp camera.h
         game_object.cpp game_object.h
+        action.cpp action.h
+        fsm.cpp fsm.h
+        states.cpp states.h
 )
 
 target_include_directories(world PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -30,6 +30,7 @@ void Game::update() {
     lag += (now - prev_counter) / (float)performance_frequency;
     prev_counter = now;
     while (lag >= dt) {
+        player->update(world, dt);
         world.update(dt);
         // put the camera lightly ahead of the player
         float L = length(player->physics.velocity);

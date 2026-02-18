@@ -1,0 +1,22 @@
+#pragma once
+
+enum class ActionType {
+    None,
+    Jump,
+    MoveLeft,
+    MoveRight,
+};
+
+class World;
+class GameObject;
+
+class Action {
+public:
+    virtual ~Action() = default;
+    virtual void perform(World& world, GameObject& obj) = 0;
+};
+
+class Jump : public Action {
+public:
+    void perform(World&, GameObject& obj) override;
+};

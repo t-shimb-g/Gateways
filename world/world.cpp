@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "vec.h"
 #include "physics.h"
+#include "fsm.h"
+#include "states.h"
 
 World::World(int width, int height)
     : tilemap{width, height} {}
@@ -21,7 +23,18 @@ bool World::collides(const Vec<float>& position) {
 }
 
 GameObject* World::create_player() {
-    player = std::make_unique<GameObject>(Vec<float>{10, 5}, Vec<int>{1, 1}, *this);
+    // Create FSM
+    Transitions transitions = {
+        {{StateType::Standing, Transition::Jump}, StateType::InAir},
+        {{StateType::InAir, Transition::Stop}, StateType::Standing},
+    };
+    States states = {
+        {StateType::Standing, new Standing()},
+        {StateType::InAir, new InAir()},
+    };
+    FSM* fsm = new FSM{transitions, states, StateType::Standing};
+
+    player = std::make_unique<GameObject>(Vec<float>{10, 5}, Vec<int>{1, 1}, *this, fsm, Color{255, 0, 255, 255});
     return player.get();
 }
 
