@@ -16,16 +16,15 @@ GameObject::~GameObject() {
 void GameObject::input(World& world) {
     const bool *key_states = SDL_GetKeyboardState(NULL);
 
-    // physics.acceleration.x = 0;
-    // if (key_states[SDL_SCANCODE_A]) {
-    //     physics.acceleration.x += -physics.walk_acceleration;
-    // }
-    // if (key_states[SDL_SCANCODE_D]) {
-    //     physics.acceleration.x += physics.walk_acceleration;
-    // }
     ActionType action_type = ActionType::None;
     if (key_states[SDL_SCANCODE_SPACE]) {
         action_type = ActionType::Jump;
+    }
+    else if (key_states[SDL_SCANCODE_D]) {
+        action_type = ActionType::MoveRight;
+    }
+    else if (key_states[SDL_SCANCODE_A]) {
+        action_type = ActionType::MoveLeft;
     }
     Action* action = fsm->current_state->input(world, *this, action_type);
     if (action != nullptr) {
