@@ -12,10 +12,10 @@ public:
     Vec<float> velocity{0,0};
     Vec<float> acceleration{0,0};
 
-    // note that these are my default values for my player's physics. You should update these to your prefer
+    // Constants
     float gravity{-30.0f};
     float damping{0.9f};
-    float walk_acceleration{30.0f};
+    float walk_acceleration{40.0f};
     float jump_velocity{20.0f};
-    float terminal_velocity{20.0f};
+    float terminal_velocity{40.0f};
 };

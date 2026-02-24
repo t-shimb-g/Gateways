@@ -26,6 +26,9 @@ void GameObject::input(World& world) {
     else if (key_states[SDL_SCANCODE_A]) {
         action_type = ActionType::MoveLeft;
     }
+    else if (key_states[SDL_SCANCODE_C]) {
+        action_type= ActionType::Crouch;
+    }
     Action* action = fsm->current_state->input(world, *this, action_type);
     if (action != nullptr) {
         action->perform(world, *this);

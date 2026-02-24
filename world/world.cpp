@@ -26,15 +26,23 @@ GameObject* World::create_player() {
     // Create FSM
     Transitions transitions = {
         {{StateType::Standing, Transition::Jump}, StateType::InAir},
-        {{StateType::InAir, Transition::Stop}, StateType::Standing},
         {{StateType::Standing, Transition::Move}, StateType::Running},
+        {{StateType::Standing, Transition::Crouch}, StateType::Crouching},
+        {{StateType::InAir, Transition::Stop}, StateType::Standing},
         {{StateType::Running, Transition::Stop}, StateType::Standing},
         {{StateType::Running, Transition::Jump}, StateType::InAir},
+        {{StateType::Running, Transition::Crouch}, StateType::Crawling},
+        {{StateType::Crouching, Transition::Crouch}, StateType::Standing},
+        {{StateType::Crouching, Transition::Move}, StateType::Crawling},
+        {{StateType::Crawling, Transition::Stop}, StateType::Crouching},
+        {{StateType::Crawling, Transition::Crouch}, StateType::Running},
     };
     States states = {
         {StateType::Standing, new Standing()},
         {StateType::InAir, new InAir()},
         {StateType::Running, new Running()},
+        {StateType::Crouching, new Crouching()},
+        {StateType::Crawling, new Crawling()},
     };
     FSM* fsm = new FSM{transitions, states, StateType::Standing};
 
