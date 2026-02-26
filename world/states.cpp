@@ -112,12 +112,14 @@ Action* Crouching::input(World& world, GameObject& obj, ActionType action_type) 
     return nullptr;
 }
 
+/*
 void Crouching::update(World& world, GameObject& obj, double dt) {
     if (!on_platform(world, obj)) {
         obj.fsm->transition(Transition::Crouch, world, obj);
         obj.fsm->transition(Transition::Jump, world, obj);
     }
 }
+*/
 
 ///////////////
 // Crawling
@@ -137,6 +139,7 @@ Action* Crawling::input(World& world, GameObject& obj, ActionType action_type) {
     return nullptr;
 }
 
+/*
 void Crawling::update(World& world, GameObject& obj, double dt) {
     if (!on_platform(world, obj)) {
         obj.fsm->transition(Transition::Stop, world, obj);
@@ -144,3 +147,4 @@ void Crawling::update(World& world, GameObject& obj, double dt) {
         obj.fsm->transition(Transition::Jump, world, obj);
     }
 }
+*/
