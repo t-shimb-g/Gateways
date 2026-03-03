@@ -18,10 +18,10 @@ public:
     void clear();
     void update();
 
-    // int get_texture_id(const std::string& image_filename);
+    int get_texture_id(const std::string& image_filename);
 
     void draw(SDL_FRect& rect, const Color& color, bool filled=true);
-    // void draw_sprite(const Vec<float>& pixel, const Sprite& sprite);
+    void draw_sprite(const Vec<float>& pixel, const Sprite& sprite);
 
     const int width, height;
 

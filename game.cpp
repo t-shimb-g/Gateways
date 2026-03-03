@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include "asset_manager.h"
 #include "input.h"
 
 Game::Game(std::string title, int width, int height)
@@ -20,6 +21,7 @@ Game::Game(std::string title, int width, int height)
 
     player = world.create_player();
     camera.set_location(player->physics.position);
+    player->sprite = AssetManager::get_game_object_sprite("player", graphics);
 }
 
 void Game::handle_event(SDL_Event* event) {
@@ -55,8 +57,7 @@ void Game::render() {
     camera.render(world.tilemap);
 
     // dray the player
-    auto [player_position, color] = player->get_sprite();
-    camera.render(player_position, color);
+    camera.render(*player);
 
     // update
     graphics.update();

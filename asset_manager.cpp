@@ -16,8 +16,8 @@ Sprite AssetManager::get_game_object_sprite(const std::string& name, Graphics& g
 
     Sprite s = json.at("idle").get<Sprite>();
     s.filename = (path_start / s.filename).string();
-    // int texture_id = graphics.get_texture_id(s.filename);
-    // s.texture_id = texture_id;
+    int texture_id = graphics.get_texture_id(s.filename);
+    s.texture_id = texture_id;
     s.shift = {-s.size.x/2, -s.size.y};
     s.center = s.size / 2.0f;
     return s;
