@@ -13,9 +13,9 @@ public:
     Vec<float> acceleration{0,0};
 
     // Constants
-    float gravity{-30.0f};
-    float damping{0.9f};
-    float walk_acceleration{40.0f};
-    float jump_velocity{20.0f};
-    float terminal_velocity{40.0f};
+    float gravity{0.0f};
+    float damping{0.0f};
+    float walk_acceleration{0.0f};
+    float jump_velocity{0.0f};
+    float terminal_velocity{0.0f};
 };

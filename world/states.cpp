@@ -16,6 +16,7 @@ bool on_platform(World& world, GameObject& obj) {
 ///////////////
 void Standing::on_enter(World&, GameObject& obj) {
     obj.color = {255, 0, 255, 255};
+    obj.set_sprite("idle");
     obj.physics.acceleration.x = 0;
 }
 
@@ -50,11 +51,15 @@ void Standing::update(World& world, GameObject& obj, double dt) {
 ///////////////
 void InAir::on_enter(World& world, GameObject& obj) {
     elapsed = cooldown;
+    obj.set_sprite("jumping");
     obj.color = {0, 0, 255, 255};
 }
 
 void InAir::update(World& world, GameObject& obj, double dt) {
     elapsed -= dt;
+    if (obj.physics.velocity.y < 0) {
+        obj.set_sprite("falling");
+    }
     if (elapsed <= 0 && on_platform(world, obj)) {
         obj.fsm->transition(Transition::Stop, world, obj);
     }
@@ -65,6 +70,7 @@ void InAir::update(World& world, GameObject& obj, double dt) {
 ///////////////
 void Running::on_enter(World&, GameObject& obj) {
     obj.color = {255, 255, 0, 255};
+    obj.set_sprite("walking");
 }
 
 Action* Running::input(World& world, GameObject& obj, ActionType action_type) {
@@ -112,15 +118,6 @@ Action* Crouching::input(World& world, GameObject& obj, ActionType action_type) 
     return nullptr;
 }
 
-/*
-void Crouching::update(World& world, GameObject& obj, double dt) {
-    if (!on_platform(world, obj)) {
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        obj.fsm->transition(Transition::Jump, world, obj);
-    }
-}
-*/
-
 ///////////////
 // Crawling
 ///////////////
@@ -138,13 +135,3 @@ Action* Crawling::input(World& world, GameObject& obj, ActionType action_type) {
     }
     return nullptr;
 }
-
-/*
-void Crawling::update(World& world, GameObject& obj, double dt) {
-    if (!on_platform(world, obj)) {
-        obj.fsm->transition(Transition::Stop, world, obj);
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        obj.fsm->transition(Transition::Jump, world, obj);
-    }
-}
-*/
