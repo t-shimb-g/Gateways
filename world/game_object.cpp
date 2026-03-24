@@ -9,6 +9,7 @@ GameObject::GameObject(const Vec<int>& size, World& world, FSM* fsm, Input* inpu
 GameObject::~GameObject() {
     delete fsm;
     delete input;
+    // delete secondary;
 }
 
 void GameObject::update(World& world, float dt) {

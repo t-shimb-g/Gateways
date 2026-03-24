@@ -16,6 +16,24 @@ void KeyboardInput::get_input() {
 }
 
 void KeyboardInput::handle_input(World& world, GameObject& obj) {
+    /*
+    GameObject& obj_copy = obj;
+    if (obj.secondary_activated) {
+        obj_copy = *obj.secondary;
+    }
+
+
+    Action* action = obj_copy.fsm->current_state->input(world, obj, next_action_type);
+
+    // Consumer the action
+    next_action_type = ActionType::None;
+    if (action != nullptr) {
+        action->perform(world, obj);
+        delete action;
+    }
+    */
+
+
     Action* action = obj.fsm->current_state->input(world, obj, next_action_type);
 
     // Consumer the action

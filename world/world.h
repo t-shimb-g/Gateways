@@ -14,6 +14,7 @@ public:
     void add_platform(float x, float y, float width, float height);
     bool collides(const Vec<float>& position);
     GameObject* create_player();
+    // GameObject* create_secondary();
     void update(float dt);
     void move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velocity);
 
@@ -21,4 +22,5 @@ public:
 
 private:
     std::unique_ptr<GameObject> player;
+    // std::unique_ptr<GameObject> secondary;
 };

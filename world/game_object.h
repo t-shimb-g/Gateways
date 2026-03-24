@@ -33,4 +33,7 @@ public:
     Sprites sprites;
     Sprite sprite;
     std::string sprite_name;
+
+    // GameObject* secondary;
+    // bool secondary_activated{false};
 };

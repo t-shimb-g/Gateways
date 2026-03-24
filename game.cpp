@@ -21,7 +21,11 @@ Game::Game(std::string title, int width, int height)
     world.add_platform(13, 4, 6, 1);
 
     player = world.create_player();
+    // player->secondary = world.create_player();
+
     AssetManager::get_game_object_details("player", graphics, *player);
+    // AssetManager::get_game_object_details("secondary", graphics, *player->secondary);
+
     player->fsm->current_state->on_enter(world, *player);
 
     camera.set_location(player->physics.position);
@@ -61,6 +65,7 @@ void Game::render() {
 
     // draw the player
     camera.render(*player);
+    // camera.render(*player->secondary);
 
     // update
     graphics.update();

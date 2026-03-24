@@ -100,6 +100,7 @@ void Running::update(World& world, GameObject& obj, double dt) {
 void Crouching::on_enter(World&, GameObject& obj) {
     obj.color = {127, 0, 255, 255};
     obj.physics.acceleration.x = 0;
+    obj.set_sprite("crouching");
 }
 
 Action* Crouching::input(World& world, GameObject& obj, ActionType action_type) {
@@ -123,6 +124,7 @@ Action* Crouching::input(World& world, GameObject& obj, ActionType action_type) 
 ///////////////
 void Crawling::on_enter(World&, GameObject& obj) {
     obj.color = {0, 255, 255, 255};
+    obj.set_sprite("crawling");
 }
 
 Action* Crawling::input(World& world, GameObject& obj, ActionType action_type) {

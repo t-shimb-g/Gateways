@@ -54,6 +54,39 @@ GameObject* World::create_player() {
     return player.get();
 }
 
+/*
+GameObject* World::create_secondary() {
+    // Create FSM
+    Transitions transitions = {
+        {{StateType::Standing, Transition::Jump}, StateType::InAir},
+        {{StateType::Standing, Transition::Move}, StateType::Running},
+        {{StateType::Standing, Transition::Crouch}, StateType::Crouching},
+        {{StateType::InAir, Transition::Stop}, StateType::Standing},
+        {{StateType::Running, Transition::Stop}, StateType::Standing},
+        {{StateType::Running, Transition::Jump}, StateType::InAir},
+        {{StateType::Running, Transition::Crouch}, StateType::Crawling},
+        {{StateType::Crouching, Transition::Crouch}, StateType::Standing},
+        {{StateType::Crouching, Transition::Move}, StateType::Crawling},
+        {{StateType::Crawling, Transition::Stop}, StateType::Crouching},
+        {{StateType::Crawling, Transition::Crouch}, StateType::Running},
+    };
+    States states = {
+        {StateType::Standing, new Standing()},
+        {StateType::InAir, new InAir()},
+        {StateType::Running, new Running()},
+        {StateType::Crouching, new Crouching()},
+        {StateType::Crawling, new Crawling()},
+    };
+    FSM* fsm = new FSM{transitions, states, StateType::Standing};
+
+    // player input
+    KeyboardInput* input = new KeyboardInput();
+
+    secondary = std::make_unique<GameObject>(Vec<int>{1, 1}, *this, fsm, input, Color{255, 0, 255, 255});
+    return secondary.get();
+}
+*/
+
 void World::update(float dt) {
     // currently only updating player (will have other game objects later)
     auto position = player->physics.position;
