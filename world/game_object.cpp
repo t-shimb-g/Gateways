@@ -3,7 +3,7 @@
 #include "action.h"
 #include "input.h"
 
-GameObject::GameObject(const Vec<int>& size, World& world, FSM* fsm, Input* input, Color color)
+GameObject::GameObject(const Vec<float> position, const Vec<int>& size, World& world, FSM* fsm, Input* input, Color color)
     : size{size}, fsm{fsm}, input{input}, color{color} {}
 
 GameObject::~GameObject() {
@@ -12,12 +12,15 @@ GameObject::~GameObject() {
     // delete secondary;
 }
 
-void GameObject::update(World& world, float dt) {
+void GameObject::update(World& world, double dt) {
     fsm->current_state->update(world, *this, dt);
     sprites[sprite_name].update(dt);
+
+    // keeps sprite facing last direction on release
     bool flipped = false;
     if (physics.velocity.x > 0) flipped = false;
     else if (physics.velocity.x < 0) flipped = true;
+
     sprites[sprite_name].flip(flipped);
     set_sprite(sprite_name);
 }

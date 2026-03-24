@@ -1,0 +1,316 @@
+{
+  "tiles" : [
+    {
+      "sprite": {
+        "name": "platform_left",
+        "filename": "industrial-tiles.png",
+        "location": [0, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "platform_middle",
+        "filename": "industrial-tiles.png",
+        "location": [32, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "platform_right",
+        "filename": "industrial-tiles.png",
+        "location": [64, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "platform_alone",
+        "filename": "industrial-tiles.png",
+        "location": [96, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_top_left",
+        "filename": "industrial-tiles.png",
+        "location": [128, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_top_right",
+        "filename": "industrial-tiles.png",
+        "location": [160, 0],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ground_left",
+        "filename": "industrial-tiles.png",
+        "location": [0, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ground_middle",
+        "filename": "industrial-tiles.png",
+        "location": [32, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ground_right",
+        "filename": "industrial-tiles.png",
+        "location": [64, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "pillar_top",
+        "filename": "industrial-tiles.png",
+        "location": [96, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_bottom_left",
+        "filename": "industrial-tiles.png",
+        "location": [128, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_bottom_right",
+        "filename": "industrial-tiles.png",
+        "location": [160, 32],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "wall_right",
+        "filename": "industrial-tiles.png",
+        "location": [0, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "blank",
+        "filename": "industrial-tiles.png",
+        "location": [32, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": false,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "wall_left",
+        "filename": "industrial-tiles.png",
+        "location": [64, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "pillar_middle",
+        "filename": "industrial-tiles.png",
+        "location": [96, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_right",
+        "filename": "industrial-tiles.png",
+        "location": [128, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_bottom",
+        "filename": "industrial-tiles.png",
+        "location": [160, 64],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ceiling_left",
+        "filename": "industrial-tiles.png",
+        "location": [0, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ceiling_middle",
+        "filename": "industrial-tiles.png",
+        "location": [32, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "ceiling_right",
+        "filename": "industrial-tiles.png",
+        "location": [64, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "pillar_bottom",
+        "filename": "industrial-tiles.png",
+        "location": [96, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_left",
+        "filename": "industrial-tiles.png",
+        "location": [128, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "interior_wall_top",
+        "filename": "industrial-tiles.png",
+        "location": [160, 96],
+        "size": [32, 32],
+        "scale": 2,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": true,
+      "event_name": ""
+    }
+  ]
+}

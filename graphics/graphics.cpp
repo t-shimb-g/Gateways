@@ -1,7 +1,7 @@
 #include "graphics.h"
 
-Graphics::Graphics(const std::string& title, int window_width, int window_height)
-    : title{title}, width{window_width}, height{window_height} {
+Graphics::Graphics(std::string title, int window_width, int window_height)
+    : width{window_width}, height{window_height} {
     SDL_SetAppMetadata(title.data(), "1.0", NULL);
 
     if (!SDL_CreateWindowAndRenderer(title.data(), width, height, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
@@ -9,11 +9,20 @@ Graphics::Graphics(const std::string& title, int window_width, int window_height
     }
 
     SDL_SetRenderLogicalPresentation(renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 }
 
 void Graphics::clear() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
+}
+
+void Graphics::update() {
+    SDL_RenderPresent(renderer);
+}
+
+void Graphics::set_title(const std::string &title) {
+    SDL_SetWindowTitle(window, title.c_str());
 }
 
 int Graphics::get_texture_id(const std::string& image_filename) {
@@ -30,6 +39,7 @@ int Graphics::get_texture_id(const std::string& image_filename) {
         if (!texture) {
             throw std::runtime_error(SDL_GetError());
         }
+        // register new texture
         int texture_id = textures.size();
         texture_ids[image_filename] = texture_id;
         // retain ownership of the texture pointer
@@ -65,9 +75,4 @@ void Graphics::draw_sprite(const Vec<float>& pixel, const Sprite& sprite) {
     SDL_Texture* texture = textures.at(sprite.texture_id);
     SDL_FlipMode flip = sprite.flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
     SDL_RenderTextureRotated(renderer, texture, &image_pixels, &screen_pixels, sprite.angle, &center, flip);
-}
-
-
-void Graphics::update() {
-    SDL_RenderPresent(renderer);
 }

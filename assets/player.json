@@ -1,0 +1,68 @@
+{
+  "sprites" : [
+    {
+      "name" : "idle",
+      "filename" : "player_idle.png",
+      "location" : [0, 0],
+      "size" : [32, 32],
+      "scale" : 2,
+      "number_of_frames" : 6,
+      "dt_per_frame" : 0.2
+    },
+    {
+      "name" : "walking",
+      "filename" : "player_walking.png",
+      "location" : [0, 0],
+      "size" : [32, 38],
+      "scale" : 2,
+      "number_of_frames" : 6,
+      "dt_per_frame" : 0.1
+    },
+    {
+      "name" : "jumping",
+      "filename" : "player_inair.png",
+      "location" : [0, 0],
+      "size" : [32, 38],
+      "scale" : 2,
+      "number_of_frames" : 1,
+      "dt_per_frame" : 0.1
+    },
+    {
+      "name" : "falling",
+      "filename" : "player_inair.png",
+      "location" : [32, 0],
+      "size" : [32, 38],
+      "scale" : 2,
+      "number_of_frames" : 1,
+      "dt_per_frame" : 0.1
+    },
+    {
+      "name" : "crouching",
+      "filename" : "RedPandaSpriteSheet.png",
+      "location" : [0, 0],
+      "size" : [32, 32],
+      "scale" : 2,
+      "number_of_frames" : 6,
+      "dt_per_frame" : 0.1
+    },
+    {
+      "name" : "crawling",
+      "filename" : "RedPandaSpriteSheet.png",
+      "location" : [0, 64],
+      "size" : [32, 32],
+      "scale" : 2,
+      "number_of_frames" : 8,
+      "dt_per_frame" : 0.1
+    }
+  ],
+  "physics" : {
+    "position" : [10, 5],
+    "velocity" : [0, 0],
+    "acceleration" : [0, -30],
+    "gravity" : -30.0,
+    "damping" : 0.9,
+    "walk_acceleration" : 60.0,
+    "jump_velocity" : 20.0,
+    "terminal_velocity" : 30.0
+  }
+}

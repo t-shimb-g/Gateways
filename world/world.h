@@ -1,26 +1,27 @@
 #pragma once
 
-#include <memory>
 #include "tilemap.h"
 #include "vec.h"
-#include "game_object.h"
 
-class Player;
+class GameObject;
+class Level;
+class Audio;
 
 class World {
 public:
-    World(int width, int height);
+    World(const Level& level, Audio& audio);
 
     void add_platform(float x, float y, float width, float height);
     bool collides(const Vec<float>& position);
-    GameObject* create_player();
-    // GameObject* create_secondary();
+    GameObject* create_player(const Level& level);
     void update(float dt);
     void move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velocity);
+
+    void load_level(const Level& level);
 
     Tilemap tilemap;
 
 private:
-    std::unique_ptr<GameObject> player;
-    // std::unique_ptr<GameObject> secondary;
+    GameObject* player;
+    Audio* audio;
 };

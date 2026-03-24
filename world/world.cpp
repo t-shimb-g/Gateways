@@ -1,18 +1,25 @@
 #include "world.h"
+
 #include <algorithm>
+
+#include "game_object.h"
 #include "vec.h"
 #include "physics.h"
 #include "fsm.h"
 #include "states.h"
 #include "keyboard_input.h"
+#include "level.h"
+#include "audio.h"
 
-World::World(int width, int height)
-    : tilemap{width, height} {}
+World::World(const Level& level, Audio& audio)
+    : audio{&audio}, tilemap{level.width, level.height} {
+    load_level(level);
+}
 
 void World::add_platform(float x, float y, float width, float height) {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
-            tilemap(x+j, y+i) = Tile::Platform;
+            tilemap(x+j, y+i) = Tile{};
         }
     }
 }
@@ -20,10 +27,10 @@ void World::add_platform(float x, float y, float width, float height) {
 bool World::collides(const Vec<float>& position) {
     int x = std::floor(position.x);
     int y = std::floor(position.y);
-    return tilemap(x, y) == Tile::Platform;
+    return tilemap(x, y).blocking;
 }
 
-GameObject* World::create_player() {
+GameObject* World::create_player(const Level& level) {
     // Create FSM
     Transitions transitions = {
         {{StateType::Standing, Transition::Jump}, StateType::InAir},
@@ -50,42 +57,12 @@ GameObject* World::create_player() {
     // player input
     KeyboardInput* input = new KeyboardInput();
 
-    player = std::make_unique<GameObject>(Vec<int>{1, 1}, *this, fsm, input, Color{255, 0, 255, 255});
-    return player.get();
+    player = new GameObject(
+        Vec<float>{static_cast<float>(level.player_spawn_location.x), static_cast<float>(level.player_spawn_location.y)},
+        Vec<int>{1,1}, *this, fsm, input, Color{255, 0, 0, 255}
+        );
+    return player;
 }
-
-/*
-GameObject* World::create_secondary() {
-    // Create FSM
-    Transitions transitions = {
-        {{StateType::Standing, Transition::Jump}, StateType::InAir},
-        {{StateType::Standing, Transition::Move}, StateType::Running},
-        {{StateType::Standing, Transition::Crouch}, StateType::Crouching},
-        {{StateType::InAir, Transition::Stop}, StateType::Standing},
-        {{StateType::Running, Transition::Stop}, StateType::Standing},
-        {{StateType::Running, Transition::Jump}, StateType::InAir},
-        {{StateType::Running, Transition::Crouch}, StateType::Crawling},
-        {{StateType::Crouching, Transition::Crouch}, StateType::Standing},
-        {{StateType::Crouching, Transition::Move}, StateType::Crawling},
-        {{StateType::Crawling, Transition::Stop}, StateType::Crouching},
-        {{StateType::Crawling, Transition::Crouch}, StateType::Running},
-    };
-    States states = {
-        {StateType::Standing, new Standing()},
-        {StateType::InAir, new InAir()},
-        {StateType::Running, new Running()},
-        {StateType::Crouching, new Crouching()},
-        {StateType::Crawling, new Crawling()},
-    };
-    FSM* fsm = new FSM{transitions, states, StateType::Standing};
-
-    // player input
-    KeyboardInput* input = new KeyboardInput();
-
-    secondary = std::make_unique<GameObject>(Vec<int>{1, 1}, *this, fsm, input, Color{255, 0, 255, 255});
-    return secondary.get();
-}
-*/
 
 void World::update(float dt) {
     // currently only updating player (will have other game objects later)
@@ -192,5 +169,11 @@ void World::move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velo
             position.x = std::floor(position.x);
             velocity.x = 0;
         }
+    }
+}
+
+void World::load_level(const Level& level) {
+    for (const auto& [pos, tile_id] : level.tile_locations) {
+        tilemap(pos.x, pos.y) = level.tile_types.at(tile_id);
     }
 }
