@@ -28,12 +28,10 @@ class Crouching : public State {
 public:
     void on_enter(World&, GameObject&) override;
     Action* input(World&, GameObject&, ActionType) override;
-    // void update(World& world, GameObject& obj, double dt) override;
 };
 
 class Crawling : public State {
 public:
     void on_enter(World&, GameObject&) override;
     Action* input(World&, GameObject&, ActionType) override;
-    // void update(World& world, GameObject& obj, double dt) override;
 };

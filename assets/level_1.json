@@ -1,4 +1,13 @@
 {
+    "enemies": [
+        {
+            "enemy": "slime",
+            "pos": [
+                14.0,
+                7.0
+            ]
+        }
+    ],
     "height": 12,
     "player_spawn_location": [
         3,
@@ -539,13 +548,6 @@
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "pos": [
-                14,
-                3
-            ],
-            "tile": "industrial-tiles.json:platform_alone"
         },
         {
             "pos": [

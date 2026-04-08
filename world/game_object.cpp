@@ -1,18 +1,19 @@
 #include "game_object.h"
+#include "world.h"
+#include "physics.h"
 #include "fsm.h"
 #include "action.h"
 #include "input.h"
 
-GameObject::GameObject(const Vec<float> position, const Vec<int>& size, World& world, FSM* fsm, Input* input, Color color)
-    : size{size}, fsm{fsm}, input{input}, color{color} {}
+GameObject::GameObject(std::string name, FSM* fsm, Input* input, Color color)
+    : obj_name{name}, fsm{fsm}, input{input}, color{color} {}
 
 GameObject::~GameObject() {
     delete fsm;
     delete input;
-    // delete secondary;
 }
 
-void GameObject::update(World& world, double dt) {
+void GameObject::update(World &world, double dt) {
     fsm->current_state->update(world, *this, dt);
     sprites[sprite_name].update(dt);
 

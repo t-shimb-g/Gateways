@@ -64,5 +64,6 @@
     "walk_acceleration" : 60.0,
     "jump_velocity" : 20.0,
     "terminal_velocity" : 30.0
-  }
+  },
+  "size" : [1, 1]
 }

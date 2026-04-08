@@ -6,13 +6,12 @@
 #include "vec.h"
 #include "physics.h"
 #include "fsm.h"
-#include "states.h"
 #include "keyboard_input.h"
 #include "level.h"
 #include "audio.h"
 
-World::World(const Level& level, Audio& audio)
-    : audio{&audio}, tilemap{level.width, level.height} {
+World::World(const Level& level, Audio& audio, GameObject* player, Events events)
+    : tilemap{level.width, level.height}, audio{&audio}, player{player}, events{events} {
     load_level(level);
 }
 
@@ -24,48 +23,14 @@ void World::add_platform(float x, float y, float width, float height) {
     }
 }
 
-bool World::collides(const Vec<float>& position) {
+bool World::collides(const Vec<float>& position) const {
     int x = std::floor(position.x);
     int y = std::floor(position.y);
     return tilemap(x, y).blocking;
 }
 
-GameObject* World::create_player(const Level& level) {
-    // Create FSM
-    Transitions transitions = {
-        {{StateType::Standing, Transition::Jump}, StateType::InAir},
-        {{StateType::Standing, Transition::Move}, StateType::Running},
-        {{StateType::Standing, Transition::Crouch}, StateType::Crouching},
-        {{StateType::InAir, Transition::Stop}, StateType::Standing},
-        {{StateType::Running, Transition::Stop}, StateType::Standing},
-        {{StateType::Running, Transition::Jump}, StateType::InAir},
-        {{StateType::Running, Transition::Crouch}, StateType::Crawling},
-        {{StateType::Crouching, Transition::Crouch}, StateType::Standing},
-        {{StateType::Crouching, Transition::Move}, StateType::Crawling},
-        {{StateType::Crawling, Transition::Stop}, StateType::Crouching},
-        {{StateType::Crawling, Transition::Crouch}, StateType::Running},
-    };
-    States states = {
-        {StateType::Standing, new Standing()},
-        {StateType::InAir, new InAir()},
-        {StateType::Running, new Running()},
-        {StateType::Crouching, new Crouching()},
-        {StateType::Crawling, new Crawling()},
-    };
-    FSM* fsm = new FSM{transitions, states, StateType::Standing};
-
-    // player input
-    KeyboardInput* input = new KeyboardInput();
-
-    player = new GameObject(
-        Vec<float>{static_cast<float>(level.player_spawn_location.x), static_cast<float>(level.player_spawn_location.y)},
-        Vec<int>{1,1}, *this, fsm, input, Color{255, 0, 0, 255}
-        );
-    return player;
-}
-
 void World::update(float dt) {
-    // currently only updating player (will have other game objects later)
+    // currently only updating player
     auto position = player->physics.position;
     auto velocity = player->physics.velocity;
     auto acceleration = player->physics.acceleration;
@@ -78,19 +43,22 @@ void World::update(float dt) {
     velocity.x = std::clamp(velocity.x, -player->physics.terminal_velocity, player->physics.terminal_velocity);
     velocity.y = std::clamp(velocity.y, -player->physics.terminal_velocity, player->physics.terminal_velocity);
 
-    // check for collisions in the world - x direction
+    // check for x collisions
+    // Check for collisions with the world - x direction
     Vec<float> future_position{position.x, player->physics.position.y};
     Vec<float> future_velocity{velocity.x, 0};
     move_to(future_position, player->size, future_velocity);
 
-    // now y direction after (maybe) moving in x
+    // y direction attempt after (maybe) moving in x
     future_velocity.y = velocity.y;
     future_position.y = position.y;
     move_to(future_position, player->size, future_velocity);
 
-    // update the player position and velocity
+    // update player
     player->physics.position = future_position;
     player->physics.velocity = future_velocity;
+
+    touch_tiles(*player);
 }
 
 void World::move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velocity) {
@@ -173,7 +141,35 @@ void World::move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velo
 }
 
 void World::load_level(const Level& level) {
+    audio->load_sounds({});
     for (const auto& [pos, tile_id] : level.tile_locations) {
         tilemap(pos.x, pos.y) = level.tile_types.at(tile_id);
+    }
+    // get all enemies
+    for (const auto& [pos, enemy_name] : level.enemy_locations) {
+        GameObject enemy{enemy_name, nullptr, nullptr, {255, 255, 0, 255}};
+        enemy.physics.position = pos;
+        game_objects.push_back(enemy);
+    }
+}
+
+void World::touch_tiles(GameObject& obj) {
+    int x = std::floor(obj.physics.position.x);
+    int y = std::floor(obj.physics.position.y);
+    const std::vector<Vec<int>> displacements{
+            {0,0},
+            {obj.size.x, 0},
+            {0, obj.size.y},
+            {obj.size.x, obj.size.y}
+    };
+    for (const auto& displacement : displacements) {
+        Tile& tile = tilemap(x+displacement.x, y+displacement.y);
+        if (!tile.event_name.empty()) {
+            auto itr = events.find(tile.event_name);
+            if (itr == events.end()) {
+                throw std::runtime_error("Cannot find event: " + tile.event_name);
+            }
+            itr->second->perform(*this, obj);
+        }
     }
 }

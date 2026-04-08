@@ -91,6 +91,12 @@ void LevelDesigner::input() {
     if (keys[SDL_SCANCODE_P]) {
         place_player();
     }
+    if (keys[SDL_SCANCODE_1]) {
+        place_enemy("bee");
+    }
+    if (keys[SDL_SCANCODE_2]) {
+        place_enemy("slime");
+    }
 
     // timer for scrolling
     if (lag < dt) {
@@ -129,12 +135,23 @@ void LevelDesigner::render() {
 
                 graphics.draw_sprite({screen_x, screen_y}, tilemap(tilemap_x, tilemap_y).sprite);
                 SDL_FRect rect{screen_x, screen_y, static_cast<float>(TILESIZE), static_cast<float>(TILESIZE)};
+
+                // highlight event tiles
+                if (!tilemap(tilemap_x, tilemap_y).event_name.empty()) {
+                    graphics.draw(rect, {255, 0, 0, 100});
+                }
+
                 Color color = selected_tile == Vec<int>{tilemap_x, tilemap_y} ? Color{255, 255, 0, 255} : Color{0, 0, 0, 255};
                 graphics.draw(rect, color, false);
 
                 // render player location as translucent purple
                 if (level.player_spawn_location.x == tilemap_x && level.player_spawn_location.y == tilemap_y) {
                     graphics.draw(rect, {255, 0, 255, 100}, true);
+                }
+
+                // draw transparent yellow if there is an enemy
+                if (level.enemy_locations.contains({static_cast<float>(tilemap_x), static_cast<float>(tilemap_y)})) {
+                    graphics.draw(rect, {255, 222, 33, 100});
                 }
             }
         }
@@ -190,4 +207,8 @@ void LevelDesigner::save() {
 
 void LevelDesigner::place_player() {
     level.player_spawn_location = selected_tile;
+}
+
+void LevelDesigner::place_enemy(std::string enemy_name) {
+    level.enemy_locations[{static_cast<float>(selected_tile.x), static_cast<float>(selected_tile.y)}] = enemy_name;
 }

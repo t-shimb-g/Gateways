@@ -5,38 +5,20 @@
 void KeyboardInput::get_input() {
     if (next_action_type == ActionType::Jump) return;
 
-    const bool* key_states = SDL_GetKeyboardState(NULL);
+    const bool *key_states = SDL_GetKeyboardState(NULL);
 
     if (key_states[SDL_SCANCODE_D]) {
         next_action_type = ActionType::MoveRight;
     }
-    else if (key_states[SDL_SCANCODE_A]) {
+    if (key_states[SDL_SCANCODE_A]) {
         next_action_type = ActionType::MoveLeft;
     }
 }
 
 void KeyboardInput::handle_input(World& world, GameObject& obj) {
-    /*
-    GameObject& obj_copy = obj;
-    if (obj.secondary_activated) {
-        obj_copy = *obj.secondary;
-    }
-
-
-    Action* action = obj_copy.fsm->current_state->input(world, obj, next_action_type);
-
-    // Consumer the action
-    next_action_type = ActionType::None;
-    if (action != nullptr) {
-        action->perform(world, obj);
-        delete action;
-    }
-    */
-
-
     Action* action = obj.fsm->current_state->input(world, obj, next_action_type);
 
-    // Consumer the action
+    // Consume the action
     next_action_type = ActionType::None;
     if (action != nullptr) {
         action->perform(world, obj);

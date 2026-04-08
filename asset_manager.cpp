@@ -1,9 +1,9 @@
 #include "asset_manager.h"
 
-#include "game_object.h"
-
 #include <filesystem>
 #include <fstream>
+
+#include "game_object.h"
 
 // helper function to convert a list of sprites to animated sprites
 void convert_sprites(std::vector<Sprite>& sprites, Graphics& graphics, GameObject& obj) {
@@ -24,12 +24,13 @@ void convert_sprites(std::vector<Sprite>& sprites, Graphics& graphics, GameObjec
 
 void AssetManager::get_game_object_details(const std::string& name, Graphics& graphics, GameObject& obj) {
     auto path_start = std::filesystem::current_path() / "assets";
-    auto path = path_start / (name + ".json");
+    auto path = path_start/ (name + ".json");
 
     std::ifstream file(path);
     if (!file) {
         throw std::runtime_error("Could not open file: " + path.string());
     }
+
     nlohmann::json json;
     file >> json;
 
@@ -38,8 +39,15 @@ void AssetManager::get_game_object_details(const std::string& name, Graphics& gr
     convert_sprites(sprites_from_json, graphics, obj);
 
     // get the object's physics
+    auto pos = obj.physics.position;
     Physics physics = json.at("physics").get<Physics>();
     obj.physics = physics;
+    obj.physics.position = pos;
+
+    // get the objects size
+    obj.size = json.at("size").get<Vec<int>>();
+
+    obj.set_sprite("idle");
 }
 
 void convert_to_tiles(Graphics& graphics, Level &level, std::vector<Tile>& tiles, const std::string& filename) {

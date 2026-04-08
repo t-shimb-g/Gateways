@@ -1,19 +1,32 @@
 #include "graphics.h"
+#include <stdexcept>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_surface.h>
 
-Graphics::Graphics(std::string title, int window_width, int window_height)
-    : width{window_width}, height{window_height} {
+Graphics::Graphics(std::string title, int width, int height)
+    : width{width}, height{height} {
+    // Set up window/renderer
     SDL_SetAppMetadata(title.data(), "1.0", NULL);
-
     if (!SDL_CreateWindowAndRenderer(title.data(), width, height, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
     }
-
     SDL_SetRenderLogicalPresentation(renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 }
 
+void Graphics::draw(const SDL_FRect& rect, const Color& color, bool filled) {
+    auto [red, green, blue, alpha] = color;
+    SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
+    if (filled) {
+        SDL_RenderFillRect(renderer, &rect);
+    }
+    else {
+        SDL_RenderRect(renderer, &rect);
+    }
+}
+
 void Graphics::clear() {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 }
 
@@ -31,7 +44,7 @@ int Graphics::get_texture_id(const std::string& image_filename) {
         int texture_id = search->second;
         return texture_id;
     }
-    else { // this is a new image file
+    else { // this is a new image filename
         SDL_Surface* surface = SDL_LoadPNG(image_filename.c_str());
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_DestroySurface(surface);
@@ -42,29 +55,17 @@ int Graphics::get_texture_id(const std::string& image_filename) {
         // register new texture
         int texture_id = textures.size();
         texture_ids[image_filename] = texture_id;
-        // retain ownership of the texture pointer
+        // retain ownership of texture pointer
         textures.push_back(texture);
         return texture_id;
     }
 }
 
-
-void Graphics::draw(SDL_FRect& rect, const Color& color, bool filled) {
-    auto [red, green, blue, alpha] = color;
-    SDL_SetRenderDrawColor(renderer, red, green, blue, alpha);
-    if (filled) {
-        SDL_RenderFillRect(renderer, &rect);
-    }
-    else {
-        SDL_RenderRect(renderer, &rect);
-    }
-}
-
-void Graphics::draw_sprite(const Vec<float>& pixel, const Sprite& sprite) {
+void Graphics::draw_sprite(const Vec<float> &pixel, const Sprite &sprite) {
     if (sprite.texture_id < 0) { // sprite has no texture
         return;
     }
-    float x = pixel.x + sprite.shift.x*sprite.scale;
+    float x  = pixel.x + sprite.shift.x*sprite.scale;
     float y = pixel.y + sprite.shift.y*sprite.scale;
     float w = sprite.size.x * sprite.scale;
     float h = sprite.size.y * sprite.scale;

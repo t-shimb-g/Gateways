@@ -1,12 +1,33 @@
 #include "camera.h"
+
 #include "graphics.h"
 #include "physics.h"
 #include "game_object.h"
 
 Camera::Camera(Graphics& graphics, float tilesize)
-    : graphics{graphics}, tilesize{tilesize} {
+    : graphics{graphics}, tilesize{tilesize}{
     calculate_visible_tiles();
     physics.damping = 0.9;
+}
+
+void Camera::calculate_visible_tiles() {
+    Vec<int> num_tiles = Vec{graphics.width, graphics.height} / (2 * static_cast<int>(tilesize)) + Vec{1, 1};
+    Vec<int> center{static_cast<int>(physics.position.x), static_cast<int>(physics.position.y)};
+    visible_max = center + num_tiles;
+    visible_min = center - num_tiles;
+}
+
+Vec<float> Camera::world_to_screen(const Vec<float>& world_position) const {
+    // world coordinates (pos y is up) -> screen coordinates (pos y is down)
+    Vec<float> pixel = (world_position - physics.position) * static_cast<float>(tilesize);
+
+    // shift to center
+    pixel += Vec<float>{graphics.width / 2.0f, graphics.height / 2.0f};
+
+    // flip y
+    pixel.y = graphics.height - pixel.y;
+
+    return pixel;
 }
 
 void Camera::handle_input() {
@@ -17,40 +38,21 @@ void Camera::handle_input() {
     }
 }
 
-void Camera::calculate_visible_tiles() {
-    Vec<int> num_tiles = Vec{graphics.width, graphics.height} / (2 * static_cast<int>(tilesize)) + Vec{1, 1};
-    Vec<int> center(static_cast<int>(physics.position.x), static_cast<int>(physics.position.y));
-    visible_max = center + num_tiles;
-    visible_min = center - num_tiles;
-}
-
-Vec<float> Camera::world_to_screen(const Vec<float>& world_position) const {
-    // world coordinates (pos y is up) -> screen coordinates (pos y is down)
-    Vec<float> pixel = (world_position - physics.position) * static_cast<float>(tilesize);
-
-    // shift to center of screen
-    pixel += Vec<float>{graphics.width / 2.0f, graphics.height / 2.0f};
-
-    // flips y axis
-    pixel.y = graphics.height - pixel.y;
-
-    return pixel;
-}
-
-void Camera::set_location(const Vec<float>& new_location) {
-    physics.position = new_location;
-    calculate_visible_tiles();
-}
 
 void Camera::update(const Vec<float>& new_location, float dt) {
     goal = new_location;
-    physics.acceleration = (goal - physics.position) * 20.0f;
+    physics.acceleration = (goal - physics.position) * 10.0f;
 
     physics.velocity += 0.5f * physics.acceleration * dt;
     physics.position += physics.velocity * dt;
     physics.velocity += 0.5f * physics.acceleration * dt;
     physics.velocity *= {physics.damping, physics.damping};
 
+    calculate_visible_tiles();
+}
+
+void Camera::set_location(const Vec<float>& new_location) {
+    physics.position = new_location;
     calculate_visible_tiles();
 }
 
@@ -88,7 +90,7 @@ void Camera::render(const Tilemap& tilemap) const {
 
 void Camera::render(const Vec<float>& position, const Sprite& sprite) const {
     Vec<float> pixel = world_to_screen(position);
-    pixel.y += tilesize / 2;
+    pixel.y += tilesize/2;
     graphics.draw_sprite(pixel, sprite);
 }
 
