@@ -1,0 +1,867 @@
+{
+    "height": 34,
+    "player_spawn_location": [
+        3,
+        3
+    ],
+    "tile_filenames": [
+        "industrial-tiles.json"
+    ],
+    "tiles": [
+        {
+            "pos": [
+                0,
+                0
+            ],
+            "tile": "industrial-tiles.json:blank"
+        },
+        {
+            "pos": [
+                0,
+                1
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                2
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                3
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                4
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                5
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                6
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                7
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                8
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                9
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                10
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                11
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                12
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                13
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                14
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                15
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                16
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                17
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                18
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                19
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                20
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                21
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                22
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                23
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                24
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                25
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                26
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                27
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                28
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                29
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                30
+            ],
+            "tile": "industrial-tiles.json:wall_left"
+        },
+        {
+            "pos": [
+                0,
+                31
+            ],
+            "tile": "industrial-tiles.json:blank"
+        },
+        {
+            "pos": [
+                1,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_left"
+        },
+        {
+            "pos": [
+                1,
+                7
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                1,
+                17
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                1,
+                21
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                1,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                1,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_left"
+        },
+        {
+            "pos": [
+                2,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                2,
+                2
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                2,
+                7
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                2,
+                12
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                2,
+                17
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                2,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                2,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                3,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                3,
+                2
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                3,
+                7
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                3,
+                12
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                3,
+                17
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                3,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                3,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                4,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                4,
+                2
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                4,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                4,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                5,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                5,
+                13
+            ],
+            "tile": "industrial-tiles.json:pillar_bottom"
+        },
+        {
+            "pos": [
+                5,
+                14
+            ],
+            "tile": "industrial-tiles.json:pillar_middle"
+        },
+        {
+            "pos": [
+                5,
+                15
+            ],
+            "tile": "industrial-tiles.json:pillar_top"
+        },
+        {
+            "pos": [
+                5,
+                24
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                5,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                5,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                6,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                6,
+                13
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                6,
+                24
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                6,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                6,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                7,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                7,
+                13
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                7,
+                24
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                7,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                7,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                8,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                8,
+                5
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                8,
+                9
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                8,
+                13
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                8,
+                24
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                8,
+                29
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                8,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                9,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "pos": [
+                9,
+                5
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                9,
+                9
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                9,
+                16
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                9,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "pos": [
+                10,
+                0
+            ],
+            "tile": "industrial-tiles.json:ground_right"
+        },
+        {
+            "pos": [
+                10,
+                5
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                10,
+                16
+            ],
+            "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "pos": [
+                10,
+                27
+            ],
+            "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                10,
+                31
+            ],
+            "tile": "industrial-tiles.json:ceiling_right"
+        },
+        {
+            "pos": [
+                11,
+                0
+            ],
+            "tile": "industrial-tiles.json:blank"
+        },
+        {
+            "pos": [
+                11,
+                1
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                2
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                3
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                4
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                5
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                6
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                7
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                8
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                9
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                10
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                11
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                12
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                13
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                14
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                15
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                16
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                17
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                18
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                19
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                20
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                21
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                22
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                23
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                24
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                25
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                26
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                27
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                28
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                29
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                30
+            ],
+            "tile": "industrial-tiles.json:wall_right"
+        },
+        {
+            "pos": [
+                11,
+                31
+            ],
+            "tile": "industrial-tiles.json:blank"
+        }
+    ],
+    "width": 12
+}

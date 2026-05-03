@@ -33,10 +33,6 @@ Action* Standing::input(World& world, GameObject& obj, ActionType action_type) {
         obj.fsm->transition(Transition::Move, world, obj);
         return new MoveLeft();
     }
-    else if (action_type == ActionType::Crouch) {
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        return new Crouch();
-    }
     return nullptr;
 }
 
@@ -81,10 +77,6 @@ Action* Running::input(World& world, GameObject& obj, ActionType action_type) {
         obj.fsm->transition(Transition::Jump, world, obj);
         return new Jump();
     }
-    else if (action_type == ActionType::Crouch) {
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        return new Crouch();
-    }
     return nullptr;
 }
 
@@ -92,48 +84,4 @@ void Running::update(World& world, GameObject& obj, double dt) {
     if (!on_platform(world, obj)) {
         obj.fsm->transition(Transition::Jump, world, obj);
     }
-}
-
-///////////////
-// Crouching
-///////////////
-void Crouching::on_enter(World&, GameObject& obj) {
-    obj.color = {127, 0, 255, 255};
-    obj.physics.acceleration.x = 0;
-    obj.set_sprite("crouching");
-}
-
-Action* Crouching::input(World& world, GameObject& obj, ActionType action_type) {
-    if (action_type == ActionType::MoveRight) {
-        obj.fsm->transition(Transition::Move, world, obj);
-        return new MoveRight();
-    }
-    else if (action_type == ActionType::MoveLeft) {
-        obj.fsm->transition(Transition::Move, world, obj);
-        return new MoveLeft();
-    }
-    else if (action_type == ActionType::Crouch) {
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        return new Crouch();
-    }
-    return nullptr;
-}
-
-///////////////
-// Crawling
-///////////////
-void Crawling::on_enter(World&, GameObject& obj) {
-    obj.color = {0, 255, 255, 255};
-    obj.set_sprite("crawling");
-}
-
-Action* Crawling::input(World& world, GameObject& obj, ActionType action_type) {
-    if (action_type == ActionType::None) {
-        obj.fsm->transition(Transition::Stop, world, obj);
-    }
-    else if (action_type == ActionType::Crouch) {
-        obj.fsm->transition(Transition::Crouch, world, obj);
-        return new Crouch();
-    }
-    return nullptr;
 }

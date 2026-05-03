@@ -65,5 +65,8 @@
     "jump_velocity" : 20.0,
     "terminal_velocity" : 30.0
   },
-  "size" : [1, 1]
+  "size" : [1, 1],
+  "health" : 10,
+  "max_health" : 10,
+  "damage" : 5
 }

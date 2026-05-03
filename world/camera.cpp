@@ -82,21 +82,33 @@ void Camera::render(const Tilemap& tilemap) const {
                 render(position, tile.sprite);
             }
             if (grid_toggle.on) {
-                render(position, {0, 0, 0, 0}, false);
+                render(position, Color{0, 0, 0, 0}, false);
             }
         }
     }
 }
 
-void Camera::render(const Vec<float>& position, const Sprite& sprite) const {
+void Camera::render(const Vec<float>& position, const Sprite& sprite, bool flash) const {
     Vec<float> pixel = world_to_screen(position);
     pixel.y += tilesize/2;
-    graphics.draw_sprite(pixel, sprite);
+    graphics.draw_sprite(pixel, sprite, flash);
 }
 
 void Camera::render(const GameObject& obj) const {
     if (grid_toggle.on) {
         render(obj.physics.position, obj.color);
     }
-    render(obj.physics.position, obj.sprite);
+    render(obj.physics.position, obj.sprite, obj.flash_sprite());
+}
+
+void Camera::render(const std::vector<Background>& backgrounds) const {
+    for (auto background : backgrounds) {
+        float shift = physics.position.x / background.distance;
+        graphics.draw_sprite({-shift, -250}, background.sprite);
+    }
+}
+
+void Camera::render_game_over() {
+    SDL_FRect full_screen{0.0f, 0.0f, static_cast<float>(graphics.width), static_cast<float>(graphics.height)};
+    graphics.draw(full_screen, Color{0, 0, 0, 180}, true);
 }

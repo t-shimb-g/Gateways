@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include "world.h"
+#include "ai_input.h"
 #include "asset_manager.h"
 #include "fsm.h"
 #include "input.h"
@@ -10,31 +10,17 @@
 
 Game::Game(std::string title, int width, int height)
     : graphics{title, width, height}, camera{graphics, 64}, dt{1.0/60.0}, lag{0.0},
-      performance_frequency{SDL_GetPerformanceFrequency()}, prev_counter{SDL_GetPerformanceCounter()} {
+    performance_frequency{SDL_GetPerformanceFrequency()}, prev_counter{SDL_GetPerformanceCounter()} {
 
     // load events
     get_events();
-
-    // load the first level
-    Level level{"level_1"};
-    AssetManager::get_level_details(graphics, level);
 
     // Giver player its assets then put it in the correct state
     create_player();
     AssetManager::get_game_object_details("player", graphics, *player);
 
-    // create the world for the first level
-    world = new World(level, audio, player.get(), events);
-
-    player->physics.position = {static_cast<float>(level.player_spawn_location.x),
-                                   static_cast<float>(level.player_spawn_location.y)};
-    player->fsm->current_state->on_enter(*world, *player);
-
-    camera.set_location(player->physics.position);
-
-    std::unordered_map<std::string, std::string> sound_files;
-    audio.load_sounds(sound_files);
-    audio.play_sounds("background", true);
+    // load first level
+    load_level();
 }
 
 Game::~Game() {
@@ -45,38 +31,67 @@ Game::~Game() {
 }
 
 void Game::handle_event(SDL_Event* event) {
-    player->input->collect_discrete_event(event);
+    switch (mode) {
+        case GameMode::Playing:
+            auto action = player->input->collect_discrete_event(event);
+            if (action) {
+                action->perform(*world, *player);
+                delete action;
+            }
+            break;
+    }
+
 }
 
+
 void Game::input() {
-    player->input->get_input();
-    camera.handle_input();
+    switch (mode) {
+        case GameMode::Playing:
+            player->input->get_input();
+            camera.handle_input();
+            break;
+    }
 }
 
 void Game::update() {
-    Uint64 now = SDL_GetPerformanceCounter(); // how many ticks am i at right now?
+    Uint64 now = SDL_GetPerformanceCounter();
     lag += (now - prev_counter) / (float)performance_frequency;
     prev_counter = now;
     while (lag >= dt) {
-        player->input->handle_input(*world, *player);
-        player->update(*world, dt);
-        world->update(dt);
+        switch (mode) {
+        case GameMode::Playing:
+                for (auto obj : world->game_objects) {
+                    obj->input->handle_input(*world, *obj);
+                }
 
-        // put the camera slightly ahead of the player
-        float L = length(player->physics.velocity);
-        Vec displacement = 2.5f * player->physics.velocity / (1.0f + L);
-        camera.update(player->physics.position + displacement, dt);
-        lag -= dt;
+                world->update(dt);
 
-        if (world->end_level) {
-            load_level();
+                // put the camera slightly ahead of the player
+                float L = length(player->physics.velocity);
+                Vec displacement = 8.0f * player->physics.velocity / (1.0f + L);
+                camera.update(player->physics.position + displacement, dt);
+
+                // check for level end
+                if (world->end_level) {
+                    load_level();
+                }
+
+                // check for game over
+                if (world->end_game) {
+                    mode = GameMode::GameOver;
+                }
+                break;
         }
+        lag -= dt;
     }
 }
 
 void Game::render() {
     // clear
     graphics.clear();
+
+    // draw the backgrounds
+    camera.render(world->backgrounds);
 
     // draw the world
     camera.render(world->tilemap);
@@ -86,7 +101,16 @@ void Game::render() {
 
     // enemies
     for (auto& obj : world->game_objects) {
-        camera.render(obj);
+        camera.render(*obj);
+    }
+
+    // projectiles
+    for (auto& projectile : world->projectiles) {
+        camera.render(*projectile);
+    }
+
+    if (mode == GameMode::GameOver) {
+        camera.render_game_over();
     }
 
     // update
@@ -95,29 +119,23 @@ void Game::render() {
 
 void Game::get_events() {
     events["next_level"] = new NextLevel();
+    events["send_to_blue"] = new SendToBlue();
+    events["send_to_orange"] = new SendToOrange();
 }
 
 void Game::create_player() {
     // Create FSM
     Transitions transitions = {
         {{StateType::Standing, Transition::Jump}, StateType::InAir},
-        {{StateType::Standing, Transition::Move}, StateType::Running},
-        {{StateType::Standing, Transition::Crouch}, StateType::Crouching},
         {{StateType::InAir, Transition::Stop}, StateType::Standing},
+        {{StateType::Standing, Transition::Move}, StateType::Running},
         {{StateType::Running, Transition::Stop}, StateType::Standing},
         {{StateType::Running, Transition::Jump}, StateType::InAir},
-        {{StateType::Running, Transition::Crouch}, StateType::Crawling},
-        {{StateType::Crouching, Transition::Crouch}, StateType::Standing},
-        {{StateType::Crouching, Transition::Move}, StateType::Crawling},
-        {{StateType::Crawling, Transition::Stop}, StateType::Crouching},
-        {{StateType::Crawling, Transition::Crouch}, StateType::Running},
     };
     States states = {
         {StateType::Standing, new Standing()},
         {StateType::InAir, new InAir()},
         {StateType::Running, new Running()},
-        {StateType::Crouching, new Crouching()},
-        {StateType::Crawling, new Crawling()},
     };
     FSM* fsm = new FSM{transitions, states, StateType::Standing};
 
@@ -136,13 +154,44 @@ void Game::load_level() {
     delete world;
     world = new World(level, audio, player.get(), events);
 
+    // get available items
+    AssetManager::get_available_items("items", graphics, *world);
+
     // assets for objs
-    for (auto& obj : world->game_objects) {
-        AssetManager::get_game_object_details(obj.obj_name + "-enemy", graphics, obj);
+    for (auto obj : world->game_objects) {
+        if (obj == world->player) continue;
+        update_enemy(*obj);
+        AssetManager::get_game_object_details(obj->obj_name + "-enemy", graphics, *obj, true);
     }
 
     player->physics.position = {static_cast<float>(level.player_spawn_location.x),
                                static_cast<float>(level.player_spawn_location.y)};
+    player->fsm->current_state->on_enter(*world, *player);
     camera.set_location(player->physics.position);
-    audio.play_sounds("background", true);
+    audio.play_sound("background", true);
+}
+
+void Game::update_enemy(GameObject& obj) {
+    Transitions transitions;
+    States states;
+
+    if (obj.obj_name == "bee" || obj.obj_name == "slime") {
+        transitions = {
+            {{StateType::Standing, Transition::Move}, StateType::Patrolling},
+            {{StateType::Patrolling, Transition::Stop}, StateType::Standing}
+        };
+        states = {
+            {StateType::Standing, new Standing()},
+        };
+    }
+    else {
+        // throw an error, unknown enemy
+    }
+
+    FSM* fsm = new FSM{transitions, states, StateType::Patrolling};
+    obj.fsm = fsm;
+
+    Input* input = new AiInput{};
+    input->next_action_type = ActionType::MoveRight;
+    obj.input = input;
 }

@@ -21,7 +21,8 @@ public:
     void set_title(const std::string& title);
 
     int get_texture_id(const std::string& image_filename);
-    void draw_sprite(const Vec<float>& pixel, const Sprite& sprite);
+    void draw_sprite(const Vec<float>& pixel, const Sprite& sprite, bool flash=false);
+    Sprite load_image(const std::string& filename);
 
     const int width;
     const int height;

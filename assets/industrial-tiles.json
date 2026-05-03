@@ -311,6 +311,32 @@
       },
       "blocking": true,
       "event_name": ""
+    },
+    {
+      "sprite": {
+        "name": "orange_portal",
+        "filename": "fire-effects.png",
+        "location": [272, 64],
+        "size": [16, 16],
+        "scale": 4,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": false,
+      "event_name": "send_to_blue"
+    },
+    {
+      "sprite": {
+        "name": "blue_portal",
+        "filename": "water-effects.png",
+        "location": [272, 64],
+        "size": [16, 16],
+        "scale": 4,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": false,
+      "event_name": "send_to_orange"
     }
   ]
 }

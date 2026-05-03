@@ -23,15 +23,3 @@ public:
     Action* input(World&, GameObject&, ActionType) override;
     void update(World&, GameObject&, double dt) override;
 };
-
-class Crouching : public State {
-public:
-    void on_enter(World&, GameObject&) override;
-    Action* input(World&, GameObject&, ActionType) override;
-};
-
-class Crawling : public State {
-public:
-    void on_enter(World&, GameObject&) override;
-    Action* input(World&, GameObject&, ActionType) override;
-};

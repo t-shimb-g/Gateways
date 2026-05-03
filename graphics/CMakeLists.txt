@@ -2,6 +2,7 @@ project(graphics)
 
 add_library(graphics
     graphics.cpp graphics.h
+    sprite.h
     animated_sprite.cpp animated_sprite.h
 )
 

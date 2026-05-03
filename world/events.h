@@ -18,3 +18,13 @@ class NextLevel : public Event {
 public:
     void perform(World& world, GameObject& obj) override;
 };
+
+class SendToBlue : public Event {
+public:
+    void perform(World& world, GameObject& obj) override;
+};
+
+class SendToOrange : public Event {
+public:
+    void perform(World& world, GameObject& obj) override;
+};

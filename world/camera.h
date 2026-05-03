@@ -21,16 +21,19 @@ public:
 
     void render(const Vec<float>& position, const Color& color, bool filled=true) const;
     void render(const Tilemap& tilemap) const;
-    void render(const Vec<float>& position, const Sprite& sprite) const;
+    void render(const Vec<float>& position, const Sprite& sprite, bool flash=false) const;
     void render(const GameObject& obj) const;
+    void render(const std::vector<Background>& backgrounds) const;
+
+    void render_game_over();
 
 private:
     Graphics& graphics;
     float tilesize;
-    Physics physics;
     Toggle grid_toggle;
 
     void calculate_visible_tiles();
     Vec<int> visible_min, visible_max;
     Vec<float> goal;
+    Physics physics;
 };

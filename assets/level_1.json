@@ -1,17 +1,42 @@
 {
-    "enemies": [
+    "backgrounds": [
         {
-            "enemy": "slime",
-            "pos": [
-                14.0,
-                7.0
-            ]
+            "distance": 1.0,
+            "filename": "BG1.png",
+            "scale": 5.0
+        },
+        {
+            "distance": 2.0,
+            "filename": "BG2.png",
+            "scale": 3.0
+        },
+        {
+            "distance": 3.0,
+            "filename": "BG3.png",
+            "scale": 3.0
         }
     ],
     "height": 12,
     "player_spawn_location": [
         3,
         4
+    ],
+    "sounds": [
+        {
+            "filename": "ambient-music-lotus.mp3",
+            "loop_forever": true,
+            "name": "background"
+        },
+        {
+            "filename": "jump.wav",
+            "loop_forever": false,
+            "name": "jump"
+        },
+        {
+            "filename": "fireball.wav",
+            "loop_forever": false,
+            "name": "fireball"
+        }
     ],
     "tile_filenames": [
         "industrial-tiles.json"
@@ -107,6 +132,13 @@
                 0
             ],
             "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "pos": [
+                1,
+                7
+            ],
+            "tile": "industrial-tiles.json:blue_portal"
         },
         {
             "pos": [
@@ -443,6 +475,13 @@
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "pos": [
+                11,
+                7
+            ],
+            "tile": "industrial-tiles.json:orange_portal"
         },
         {
             "pos": [

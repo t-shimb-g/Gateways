@@ -26,13 +26,12 @@ void KeyboardInput::handle_input(World& world, GameObject& obj) {
     }
 }
 
-void KeyboardInput::collect_discrete_event(SDL_Event* event) {
+Action* KeyboardInput::collect_discrete_event(SDL_Event* event) {
     if (event->type == SDL_EVENT_KEY_DOWN && event->key.repeat == 0) {
         if (event->key.scancode == SDL_SCANCODE_SPACE) {
             next_action_type = ActionType::Jump;
         }
-        else if (event->key.scancode == SDL_SCANCODE_C) {
-            next_action_type = ActionType::Crouch;
-        }
     }
+    // TODO: E for use
+    return nullptr;
 }
