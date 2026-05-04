@@ -125,5 +125,6 @@ void Strafing::update(World& world, GameObject& obj, double dt) {
     }
     if (on_platform(world, obj)) {
         obj.fsm->transition(Transition::Stop, world, obj);
+        obj.fsm->transition(Transition::Stop, world, obj);
     }
 }
