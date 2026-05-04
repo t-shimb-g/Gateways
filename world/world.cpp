@@ -115,6 +115,7 @@ void World::update_object(GameObject* obj, double dt) {
     Vec<float> future_position{position.x, obj->physics.position.y};
     Vec<float> future_velocity{velocity.x, 0};
     move_to(future_position, obj->size, future_velocity);
+    if (future_velocity.x == 0) obj->physics.acceleration.x = 0;
 
     // y direction attempt after (maybe) moving in x
     future_velocity.y = velocity.y;

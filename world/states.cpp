@@ -51,6 +51,19 @@ void InAir::on_enter(World& world, GameObject& obj) {
     obj.color = {0, 0, 255, 255};
 }
 
+Action* InAir::input(World& world, GameObject& obj, ActionType action_type) {
+    if (action_type == ActionType::MoveRight) {
+        obj.fsm->transition(Transition::Move, world, obj);
+        return new MoveRight();
+    }
+    else if (action_type == ActionType::MoveLeft) {
+        obj.fsm->transition(Transition::Move, world, obj);
+        return new MoveLeft();
+    }
+    return nullptr;
+}
+
+
 void InAir::update(World& world, GameObject& obj, double dt) {
     elapsed -= dt;
     if (obj.physics.velocity.y < 0) {
@@ -83,5 +96,34 @@ Action* Running::input(World& world, GameObject& obj, ActionType action_type) {
 void Running::update(World& world, GameObject& obj, double dt) {
     if (!on_platform(world, obj)) {
         obj.fsm->transition(Transition::Jump, world, obj);
+    }
+}
+
+///////////////
+// Strafing
+///////////////
+void Strafing::on_enter(World&, GameObject& obj) {
+    obj.color = {0, 255, 0, 255};
+    if (obj.physics.velocity.y < 0) {
+        obj.set_sprite("falling");
+    }
+    else {
+        obj.set_sprite("jumping");
+    }
+}
+
+Action* Strafing::input(World& world, GameObject& obj, ActionType action_type) {
+    if (action_type == ActionType::None) {
+        obj.fsm->transition(Transition::Stop, world, obj);
+    }
+    return nullptr;
+}
+
+void Strafing::update(World& world, GameObject& obj, double dt) {
+    if (obj.physics.velocity.y < 0) {
+        obj.set_sprite("falling");
+    }
+    if (on_platform(world, obj)) {
+        obj.fsm->transition(Transition::Stop, world, obj);
     }
 }

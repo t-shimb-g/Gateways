@@ -31,8 +31,3 @@ class MoveLeft : public Action {
 public:
     void perform(World&, GameObject& obj) override;
 };
-
-class Crouch : public Action {
-public:
-    void perform(World&, GameObject& obj) override;
-};

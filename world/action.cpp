@@ -16,11 +16,3 @@ void MoveRight::perform(World&, GameObject& obj) {
 void MoveLeft::perform(World&, GameObject& obj) {
     obj.physics.acceleration.x = -obj.physics.walk_acceleration;
 }
-
-void Crouch::perform(World&, GameObject& obj) {
-    // static bool is made and "remembered" between perform() calls
-    static bool crouched = true; // initially true since player starts standing
-    obj.physics.walk_acceleration = !crouched ? 60.0f : 10.0f;
-    obj.physics.terminal_velocity = !crouched ? 30.0f : 15.0;
-    crouched = !crouched;
-}

@@ -131,11 +131,14 @@ void Game::create_player() {
         {{StateType::Standing, Transition::Move}, StateType::Running},
         {{StateType::Running, Transition::Stop}, StateType::Standing},
         {{StateType::Running, Transition::Jump}, StateType::InAir},
+        {{StateType::InAir, Transition::Move}, StateType::Strafing},
+        {{StateType::Strafing, Transition::Stop}, StateType::InAir}
     };
     States states = {
         {StateType::Standing, new Standing()},
         {StateType::InAir, new InAir()},
         {StateType::Running, new Running()},
+        {StateType::Strafing, new Strafing()}
     };
     FSM* fsm = new FSM{transitions, states, StateType::Standing};
 
