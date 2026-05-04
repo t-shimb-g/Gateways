@@ -36,11 +36,23 @@ public:
     Audio* audio;
     std::vector<GameObject*> game_objects;
     std::vector<Projectile*> projectiles;
-    Vec<float> blue_portal_pos, orange_portal_pos;
-    Facing blue_portal_facing, orange_portal_facing;
+
     Events events;
 
-    void touch_tiles(GameObject& obj);
+    // portal data
+    Vec<float> active_blue_pos, active_orange_pos;
+    Facing active_blue_facing, active_orange_facing;
+
+    Vec<float> blue_portal_pos_a, orange_portal_pos_a;
+    Facing blue_portal_facing_a, orange_portal_facing_a;
+
+    Vec<float> blue_portal_pos_b, orange_portal_pos_b;
+    Facing blue_portal_facing_b, orange_portal_facing_b;
+
+    bool blue_portal_state, orange_portal_state = true;
+
+
+    void touch_tiles(GameObject& obj, bool use=false);
 
     QuadTree quadtree;
 

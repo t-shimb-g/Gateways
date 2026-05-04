@@ -75,18 +75,20 @@ void Camera::render(const Tilemap& tilemap) const {
             const Tile& tile = tilemap(x, y);
             Vec<float> position{static_cast<float>(x), static_cast<float>(y)};
 
-            if (tile.blocking) {
-                render(position, tile.sprite);
-            }
-            else {
-                render(position, tile.sprite);
-            }
+            if (tile.event_name == "send_to_blue" || tile.event_name == "send_to_orange") continue; // skip portal rendering
+            render(position, tile.sprite);
             if (grid_toggle.on) {
                 render(position, Color{0, 0, 0, 0}, false);
             }
         }
     }
 }
+
+void Camera::render(Vec<float> blue_pos, Vec<float> orange_pos, const Sprite* blue_sprite, const Sprite* orange_sprite) const {
+    render(blue_pos, *blue_sprite);
+    render(orange_pos, *orange_sprite);
+}
+
 
 void Camera::render(const Vec<float>& position, const Sprite& sprite, bool flash) const {
     Vec<float> pixel = world_to_screen(position);

@@ -33,6 +33,9 @@ Action* Standing::input(World& world, GameObject& obj, ActionType action_type) {
         obj.fsm->transition(Transition::Move, world, obj);
         return new MoveLeft();
     }
+    else if (action_type == ActionType::Use) {
+        return new Use();
+    }
     return nullptr;
 }
 
@@ -90,6 +93,9 @@ Action* Running::input(World& world, GameObject& obj, ActionType action_type) {
         obj.fsm->transition(Transition::Jump, world, obj);
         return new Jump();
     }
+    else if (action_type == ActionType::Use) {
+        return new Use();
+    }
     return nullptr;
 }
 
@@ -124,7 +130,7 @@ void Strafing::update(World& world, GameObject& obj, double dt) {
         obj.set_sprite("falling");
     }
     if (on_platform(world, obj)) {
-        obj.fsm->transition(Transition::Stop, world, obj);
-        obj.fsm->transition(Transition::Stop, world, obj);
+        obj.fsm->transition(Transition::Stop, world, obj); // move to InAir
+        obj.fsm->transition(Transition::Stop, world, obj); // move to Standing/Running
     }
 }

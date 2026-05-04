@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <iostream>
+
 #include "ai_input.h"
 #include "asset_manager.h"
 #include "fsm.h"
@@ -96,6 +98,11 @@ void Game::render() {
     // draw the world
     camera.render(world->tilemap);
 
+    // draw portals
+    Sprite blue_sprite = world->tilemap(world->active_blue_pos.x, world->active_blue_pos.y).sprite;
+    Sprite orange_sprite = world->tilemap(world->active_orange_pos.x, world->active_orange_pos.y).sprite;
+    camera.render(world->active_blue_pos, world->active_orange_pos, &blue_sprite, &orange_sprite);
+
     // draw the player
     camera.render(*player);
 
@@ -121,6 +128,8 @@ void Game::get_events() {
     events["next_level"] = new NextLevel();
     events["send_to_blue"] = new SendToBlue();
     events["send_to_orange"] = new SendToOrange();
+    events["toggle_blue"] = new ToggleBlue();
+    events["toggle_orange"] = new ToggleOrange();
 }
 
 void Game::create_player() {
@@ -168,7 +177,7 @@ void Game::load_level() {
     }
 
     player->physics.position = {static_cast<float>(level.player_spawn_location.x),
-                               static_cast<float>(level.player_spawn_location.y)};
+                                   static_cast<float>(level.player_spawn_location.y)};
     player->fsm->current_state->on_enter(*world, *player);
     camera.set_location(player->physics.position);
     audio.play_sound("background", true);

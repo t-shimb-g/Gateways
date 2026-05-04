@@ -16,3 +16,7 @@ void MoveRight::perform(World&, GameObject& obj) {
 void MoveLeft::perform(World&, GameObject& obj) {
     obj.physics.acceleration.x = -obj.physics.walk_acceleration;
 }
+
+void Use::perform(World& world, GameObject& obj) {
+    world.touch_tiles(obj, true);
+}

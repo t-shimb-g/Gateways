@@ -31,7 +31,9 @@ Action* KeyboardInput::collect_discrete_event(SDL_Event* event) {
         if (event->key.scancode == SDL_SCANCODE_SPACE) {
             next_action_type = ActionType::Jump;
         }
+        if (event->key.scancode == SDL_SCANCODE_E) {
+            next_action_type = ActionType::Use;
+        }
     }
-    // TODO: E for use
     return nullptr;
 }

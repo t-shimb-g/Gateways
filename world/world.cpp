@@ -1,6 +1,7 @@
 #include "world.h"
 
 #include <algorithm>
+#include <iostream>
 
 #include "game_object.h"
 #include "vec.h"
@@ -216,6 +217,8 @@ void World::load_level(const Level& level) {
         tilemap(pos.x, pos.y) = level.tile_types.at(tile_id);
     }
     get_portal_details(level.tile_facings);
+    active_blue_pos = blue_portal_state ? blue_portal_pos_a : blue_portal_pos_b;
+    active_orange_pos = orange_portal_state ? orange_portal_pos_a : orange_portal_pos_b;
 
     // get all enemies
     for (const auto& [pos, enemy_name] : level.enemy_locations) {
@@ -228,22 +231,42 @@ void World::load_level(const Level& level) {
 }
 
 void World::get_portal_details(TileFacings tile_facings) {
+    bool first_blue = true;
+    bool first_orange = true;
+
     for (int y = 0; y < tilemap.height; ++y) {
         for (int x = 0; x < tilemap.width; ++x) {
             auto tile = tilemap(x, y);
             if (tile.event_name == "send_to_blue") {
-                orange_portal_pos = {static_cast<float>(x), static_cast<float>(y)};
-                orange_portal_facing = tile_facings[{x, y}];
+                std::cout << "BLUE TILE at (" << x << "," << y << ")\n";
+                if (first_orange) {
+                    orange_portal_pos_a = {static_cast<float>(x), static_cast<float>(y)};
+                    orange_portal_facing_a = tile_facings[{x, y}];
+                    first_orange = false;
+                    orange_portal_pos_b = orange_portal_pos_a; // in case only 1 orange
+                }
+                else { // second orange portal
+                    orange_portal_pos_b = {static_cast<float>(x), static_cast<float>(y)};
+                    orange_portal_facing_b = tile_facings[{x, y}];
+                }
             }
             else if (tile.event_name == "send_to_orange") {
-                blue_portal_pos = {static_cast<float>(x), static_cast<float>(y)};
-                blue_portal_facing = tile_facings[{x, y}];
+                if (first_blue) {
+                    blue_portal_pos_a = {static_cast<float>(x), static_cast<float>(y)};
+                    blue_portal_facing_a = tile_facings[{x, y}];
+                    first_blue = false;
+                    blue_portal_pos_b = blue_portal_pos_a; // in case only 1 blue
+                }
+                else { // second blue portal
+                    blue_portal_pos_b = {static_cast<float>(x), static_cast<float>(y)};
+                    blue_portal_facing_b = tile_facings[{x, y}];
+                }
             }
         }
     }
 }
 
-void World::touch_tiles(GameObject& obj) {
+void World::touch_tiles(GameObject& obj, bool use) {
     float epsilon = 0.001f;
 
     const std::vector<Vec<float>> tiles {
@@ -262,6 +285,30 @@ void World::touch_tiles(GameObject& obj) {
             if (itr == events.end()) {
                 throw std::runtime_error("Cannot find event: " + tile.event_name);
             }
+
+            // toggle events
+            if (tile.event_name == "toggle_blue" || tile.event_name == "toggle_orange") {
+                if (use) {
+                    itr->second->perform(*this, obj);
+                }
+                continue;
+            }
+
+            // portal events
+            if (tile.event_name == "send_to_blue") {
+                // only teleport if THIS tile is the active orange portal
+                if (Vec<float>{float(x), float(y)} == active_orange_pos) {
+                    itr->second->perform(*this, obj);
+                }
+                continue;
+            }
+            if (tile.event_name == "send_to_orange") {
+                if (Vec<float>{float(x), float(y)} == active_blue_pos) {
+                    itr->second->perform(*this, obj);
+                }
+                continue;
+            }
+
             itr->second->perform(*this, obj);
         }
     }

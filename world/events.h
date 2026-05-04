@@ -28,3 +28,13 @@ class SendToOrange : public Event {
 public:
     void perform(World& world, GameObject& obj) override;
 };
+
+class ToggleBlue : public Event {
+public:
+    void perform(World& world, GameObject& obj) override;
+};
+
+class ToggleOrange : public Event {
+public:
+    void perform(World& world, GameObject& obj) override;
+};

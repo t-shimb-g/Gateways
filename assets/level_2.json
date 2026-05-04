@@ -33,9 +33,14 @@
             "name": "jump"
         },
         {
-            "filename": "fireball.wav",
+            "filename": "portal-use.wav",
             "loop_forever": false,
-            "name": "fireball"
+            "name": "portal-use"
+        },
+        {
+            "filename": "portal-swap.wav",
+            "loop_forever": false,
+            "name": "portal-swap"
         }
     ],
     "tile_filenames": [
@@ -310,9 +315,25 @@
             "facing": "none",
             "pos": [
                 1,
+                2
+            ],
+            "tile": "industrial-tiles.json:blue_portal"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                1,
                 7
             ],
             "tile": "industrial-tiles.json:platform_left"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                1,
+                8
+            ],
+            "tile": "industrial-tiles.json:blue_toggle"
         },
         {
             "facing": "none",
@@ -598,6 +619,14 @@
             "facing": "none",
             "pos": [
                 7,
+                10
+            ],
+            "tile": "industrial-tiles.json:blue_portal"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                7,
                 13
             ],
             "tile": "industrial-tiles.json:platform_middle"
@@ -694,6 +723,14 @@
             "facing": "none",
             "pos": [
                 9,
+                2
+            ],
+            "tile": "industrial-tiles.json:orange_portal"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                9,
                 5
             ],
             "tile": "industrial-tiles.json:platform_middle"
@@ -705,6 +742,14 @@
                 9
             ],
             "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                9,
+                10
+            ],
+            "tile": "industrial-tiles.json:orange_portal"
         },
         {
             "facing": "none",
@@ -737,6 +782,14 @@
                 5
             ],
             "tile": "industrial-tiles.json:platform_right"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                10,
+                6
+            ],
+            "tile": "industrial-tiles.json:orange_toggle"
         },
         {
             "facing": "none",

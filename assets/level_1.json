@@ -33,9 +33,14 @@
             "name": "jump"
         },
         {
-            "filename": "fireball.wav",
+            "filename": "portal-use.wav",
             "loop_forever": false,
-            "name": "fireball"
+            "name": "portal-use"
+        },
+        {
+            "filename": "portal-swap.wav",
+            "loop_forever": false,
+            "name": "portal-swap"
         }
     ],
     "tile_filenames": [
