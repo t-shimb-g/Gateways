@@ -6,6 +6,8 @@
 #include "quadtree.h"
 #include "projectile.h"
 
+using TileFacings = std::map<Vec<int>, Facing>;
+
 class GameObject;
 class Level;
 class Audio;
@@ -22,7 +24,7 @@ public:
     void update_object(GameObject* obj, double dt);
 
     void load_level(const Level& level);
-    void find_portal_positions();
+    void get_portal_details(TileFacings tile_facings);
 
     void build_quadtree();
 
@@ -35,6 +37,7 @@ public:
     std::vector<GameObject*> game_objects;
     std::vector<Projectile*> projectiles;
     Vec<float> blue_portal_pos, orange_portal_pos;
+    Facing blue_portal_facing, orange_portal_facing;
     Events events;
 
     void touch_tiles(GameObject& obj);

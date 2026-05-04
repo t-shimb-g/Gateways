@@ -68,6 +68,7 @@ void convert_to_tiles(Graphics& graphics, Level& level, std::vector<Tile>& tiles
         tile.sprite.shift = {-tile.sprite.size.x/2, -tile.sprite.size.y}; // anchor sprite at bottom corner
         tile.sprite.center = tile.sprite.size / 2.0f;
         tile.id = filename + ":" + tile.sprite.name;
+        tile.facing = Facing::None;
         level.tile_types[tile.id] = tile;
     }
 }

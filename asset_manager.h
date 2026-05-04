@@ -27,6 +27,14 @@ void from_json(const nlohmann::json& j, Vec<T>& v) {
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Sound, name, filename, loop_forever);
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Background, filename, scale, distance);
 
+NLOHMANN_JSON_SERIALIZE_ENUM(Facing, {
+    {Facing::None, "none"},
+    {Facing::Up, "up"},
+    {Facing::Down, "down"},
+    {Facing::Left, "left"},
+    {Facing::Right, "right"},
+})
+
 // json for Level
 inline void to_json(nlohmann::json& j, const Level& level) {
     j["width"] = level.width;
@@ -39,7 +47,8 @@ inline void to_json(nlohmann::json& j, const Level& level) {
     for (const auto& [pos, tile] : level.tile_locations) {
         j["tiles"].push_back({
             {"pos", pos},
-            {"tile", tile}
+            {"tile", tile},
+            {"facing", "none"}
         });
     }
     for (const auto& [pos, enemy] : level.enemy_locations) {
@@ -49,6 +58,7 @@ inline void to_json(nlohmann::json& j, const Level& level) {
         });
     }
 }
+
 inline void from_json(const nlohmann::json& j, Level& level) {
     level.width = j.at("width").get<int>();
     level.height = j.at("height").get<int>();
@@ -60,7 +70,9 @@ inline void from_json(const nlohmann::json& j, Level& level) {
         for (const auto& t : j.at("tiles")) {
             Vec<int> pos = t.at("pos").get<Vec<int>>();
             std::string tile_id = t.at("tile").get<std::string>();
+            Facing facing = t.at("facing").get<Facing>();
             level.tile_locations[pos] = tile_id;
+            level.tile_facings[pos] = facing;
         }
     }
     if (j.contains("enemies")) {

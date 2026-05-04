@@ -10,12 +10,15 @@ struct Background {
     Sprite sprite;
 };
 
+enum class Facing { None, Up, Down, Left, Right };
+
 class Tile {
 public:
     Sprite sprite;
     bool blocking{false};
     std::string id;
     std::string event_name;
+    Facing facing{ Facing::None };
 };
 
 class Tilemap {

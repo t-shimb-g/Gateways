@@ -214,7 +214,7 @@ void World::load_level(const Level& level) {
     for (const auto& [pos, tile_id] : level.tile_locations) {
         tilemap(pos.x, pos.y) = level.tile_types.at(tile_id);
     }
-    find_portal_positions();
+    get_portal_details(level.tile_facings);
 
     // get all enemies
     for (const auto& [pos, enemy_name] : level.enemy_locations) {
@@ -226,15 +226,17 @@ void World::load_level(const Level& level) {
     game_objects.push_back(player);
 }
 
-void World::find_portal_positions() {
+void World::get_portal_details(TileFacings tile_facings) {
     for (int y = 0; y < tilemap.height; ++y) {
         for (int x = 0; x < tilemap.width; ++x) {
             auto tile = tilemap(x, y);
             if (tile.event_name == "send_to_blue") {
                 orange_portal_pos = {static_cast<float>(x), static_cast<float>(y)};
+                orange_portal_facing = tile_facings[{x, y}];
             }
             else if (tile.event_name == "send_to_orange") {
                 blue_portal_pos = {static_cast<float>(x), static_cast<float>(y)};
+                blue_portal_facing = tile_facings[{x, y}];
             }
         }
     }
