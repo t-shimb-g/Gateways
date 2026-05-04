@@ -8,7 +8,7 @@
 
 #include <memory>
 
-enum class GameMode {Playing, GameOver};
+enum class GameMode {Playing, GameOver, Winner};
 
 class Game {
 public:

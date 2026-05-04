@@ -224,7 +224,7 @@ void World::load_level(const Level& level) {
     }
     get_portal_details(level.tile_facings);
     active_blue_pos = blue_portal_state ? blue_portal_pos_a : blue_portal_pos_b;
-    active_orange_pos = orange_portal_state ? orange_portal_pos_a : orange_portal_pos_b;
+    active_orange_pos = orange_portal_state ? orange_portal_pos_b : orange_portal_pos_a;
     active_blue_facing = get_facing_at(level, active_blue_pos);
     active_orange_facing = get_facing_at(level, active_orange_pos);
 

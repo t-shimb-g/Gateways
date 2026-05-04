@@ -30,6 +30,7 @@ public:
 
     Tilemap tilemap;
     bool end_level{false};
+    bool win{false};
     bool end_game{false};
 
     GameObject* player;

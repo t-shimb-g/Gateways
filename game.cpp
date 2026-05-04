@@ -80,7 +80,12 @@ void Game::update() {
 
                 // check for game over
                 if (world->end_game) {
-                    mode = GameMode::GameOver;
+                    if (world->win) {
+                        mode = GameMode::Winner;
+                    }
+                    else {
+                        mode = GameMode::GameOver;
+                    }
                 }
                 break;
         }
@@ -122,6 +127,9 @@ void Game::render() {
     if (mode == GameMode::GameOver) {
         camera.render_game_over();
     }
+    if (mode == GameMode::Winner) {
+        camera.render_winner();
+    }
 
     // update
     graphics.update();
@@ -133,6 +141,7 @@ void Game::get_events() {
     events["send_to_orange"] = new SendToOrange();
     events["toggle_blue"] = new ToggleBlue();
     events["toggle_orange"] = new ToggleOrange();
+    events["win_game"] = new WinButton();
 }
 
 void Game::create_player() {

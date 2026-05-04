@@ -38,3 +38,8 @@ class ToggleOrange : public Event {
 public:
     void perform(World& world, GameObject& obj) override;
 };
+
+class WinButton : public Event {
+public:
+    void perform(World& world, GameObject& obj) override;
+};

@@ -105,3 +105,8 @@ void ToggleOrange::perform(World& world, GameObject& obj) {
     world.active_orange_pos = world.orange_portal_state ? world.orange_portal_pos_a : world.orange_portal_pos_b;
     world.audio->play_sound("portal-swap");
 }
+
+void WinButton::perform(World& world, GameObject& obj) {
+    world.win = true;
+    world.end_game = true;
+}

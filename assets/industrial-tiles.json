@@ -363,6 +363,19 @@
       },
       "blocking": false,
       "event_name": "toggle_orange"
+    },
+    {
+      "sprite": {
+        "name": "win_button",
+        "filename": "green-effects.png",
+        "location": [224, 48],
+        "size": [16, 16],
+        "scale": 4,
+        "number_of_frames": 1,
+        "dt_per_frame": -1
+      },
+      "blocking": false,
+      "event_name": "win_game"
     }
   ]
 }
