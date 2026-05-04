@@ -49,8 +49,8 @@ public:
     Vec<float> blue_portal_pos_b, orange_portal_pos_b;
     Facing blue_portal_facing_b, orange_portal_facing_b;
 
-    bool blue_portal_state, orange_portal_state = true;
-
+    bool blue_portal_state = true;
+    bool orange_portal_state = false;
 
     void touch_tiles(GameObject& obj, bool use=false);
 

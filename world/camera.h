@@ -24,7 +24,6 @@ public:
     void render(const Vec<float>& position, const Sprite& sprite, bool flash=false) const;
     void render(const GameObject& obj) const;
     void render(const std::vector<Background>& backgrounds) const;
-    void render(Vec<float> blue_pos, Vec<float> orange_pos, const Sprite* blue_sprite, const Sprite* orange_sprite) const; // render portals
 
     void render_game_over();
 

@@ -1,7 +1,6 @@
 #include "world.h"
 
 #include <algorithm>
-#include <iostream>
 
 #include "game_object.h"
 #include "vec.h"
@@ -238,7 +237,6 @@ void World::get_portal_details(TileFacings tile_facings) {
         for (int x = 0; x < tilemap.width; ++x) {
             auto tile = tilemap(x, y);
             if (tile.event_name == "send_to_blue") {
-                std::cout << "BLUE TILE at (" << x << "," << y << ")\n";
                 if (first_orange) {
                     orange_portal_pos_a = {static_cast<float>(x), static_cast<float>(y)};
                     orange_portal_facing_a = tile_facings[{x, y}];

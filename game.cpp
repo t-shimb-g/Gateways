@@ -101,7 +101,10 @@ void Game::render() {
     // draw portals
     Sprite blue_sprite = world->tilemap(world->active_blue_pos.x, world->active_blue_pos.y).sprite;
     Sprite orange_sprite = world->tilemap(world->active_orange_pos.x, world->active_orange_pos.y).sprite;
-    camera.render(world->active_blue_pos, world->active_orange_pos, &blue_sprite, &orange_sprite);
+    camera.render(world->blue_portal_pos_a, blue_sprite, world->active_blue_pos != world->blue_portal_pos_a);
+    camera.render(world->blue_portal_pos_b, blue_sprite, world->active_blue_pos != world->blue_portal_pos_b);
+    camera.render(world->orange_portal_pos_a, orange_sprite, world->active_orange_pos != world->orange_portal_pos_a);
+    camera.render(world->orange_portal_pos_b, orange_sprite, world->active_orange_pos != world->orange_portal_pos_b);
 
     // draw the player
     camera.render(*player);

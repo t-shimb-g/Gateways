@@ -84,7 +84,7 @@ void Graphics::draw_sprite(const Vec<float>& pixel, const Sprite& sprite, bool f
 
     if (flash) {
         SDL_SetTextureColorMod(texture, 255, 255, 255);
-        SDL_SetTextureAlphaMod(texture, 160);
+        SDL_SetTextureAlphaMod(texture, 128);
     }
 
     SDL_RenderTextureRotated(renderer, texture, &image_pixels, &screen_pixels, sprite.angle, &center, flip);

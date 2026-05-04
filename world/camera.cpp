@@ -84,12 +84,6 @@ void Camera::render(const Tilemap& tilemap) const {
     }
 }
 
-void Camera::render(Vec<float> blue_pos, Vec<float> orange_pos, const Sprite* blue_sprite, const Sprite* orange_sprite) const {
-    render(blue_pos, *blue_sprite);
-    render(orange_pos, *orange_sprite);
-}
-
-
 void Camera::render(const Vec<float>& position, const Sprite& sprite, bool flash) const {
     Vec<float> pixel = world_to_screen(position);
     pixel.y += tilesize/2;
