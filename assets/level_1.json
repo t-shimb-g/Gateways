@@ -16,10 +16,10 @@
             "scale": 3.0
         }
     ],
-    "height": 24,
+    "height": 9,
     "player_spawn_location": [
-        3,
-        4
+        2,
+        1
     ],
     "sounds": [
         {
@@ -122,30 +122,6 @@
         {
             "facing": "none",
             "pos": [
-                0,
-                9
-            ],
-            "tile": "industrial-tiles.json:wall_left"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                0,
-                10
-            ],
-            "tile": "industrial-tiles.json:wall_left"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                0,
-                11
-            ],
-            "tile": "industrial-tiles.json:blank"
-        },
-        {
-            "facing": "none",
-            "pos": [
                 1,
                 0
             ],
@@ -155,310 +131,54 @@
             "facing": "none",
             "pos": [
                 1,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                2,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                2,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                3,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                3,
-                3
+                4
             ],
             "tile": "industrial-tiles.json:ground_left"
         },
         {
             "facing": "none",
             "pos": [
-                3,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                4,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                4,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                4,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                5,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                5,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                5,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                6,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                6,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                6,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                7,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                7,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                7,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                8,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                8,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                8,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                9,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                9,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                9,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                10,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                10,
-                3
-            ],
-            "tile": "industrial-tiles.json:ground_right"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                10,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                11,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "up",
-            "pos": [
-                11,
-                1
-            ],
-            "tile": "industrial-tiles.json:orange_portal"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
-                6
-            ],
-            "tile": "industrial-tiles.json:pillar_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
-                7
-            ],
-            "tile": "industrial-tiles.json:pillar_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
+                1,
                 8
             ],
-            "tile": "industrial-tiles.json:pillar_middle"
+            "tile": "industrial-tiles.json:ceiling_left"
         },
         {
             "facing": "none",
             "pos": [
-                12,
-                9
-            ],
-            "tile": "industrial-tiles.json:pillar_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
-                10
-            ],
-            "tile": "industrial-tiles.json:pillar_top"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                12,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                13,
+                2,
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
         },
         {
-            "facing": "up",
+            "facing": "none",
             "pos": [
-                13,
-                1
+                2,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "right",
+            "pos": [
+                2,
+                6
             ],
             "tile": "industrial-tiles.json:blue_portal"
         },
         {
             "facing": "none",
             "pos": [
-                14,
+                2,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                3,
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
@@ -466,15 +186,23 @@
         {
             "facing": "none",
             "pos": [
-                14,
-                11
+                3,
+                4
             ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
+            "tile": "industrial-tiles.json:ground_middle"
         },
         {
             "facing": "none",
             "pos": [
-                15,
+                3,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                4,
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
@@ -482,23 +210,135 @@
         {
             "facing": "none",
             "pos": [
-                15,
-                9
+                4,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                4,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                5,
+                0
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                5,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                5,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                6,
+                0
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                6,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                6,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                7,
+                0
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                7,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                7,
+                8
+            ],
+            "tile": "industrial-tiles.json:ceiling_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                8,
+                0
+            ],
+            "tile": "industrial-tiles.json:platform_middle"
+        },
+        {
+            "facing": "left",
+            "pos": [
+                8,
+                2
+            ],
+            "tile": "industrial-tiles.json:orange_portal"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                8,
+                4
+            ],
+            "tile": "industrial-tiles.json:ground_middle"
+        },
+        {
+            "facing": "none",
+            "pos": [
+                8,
+                6
             ],
             "tile": "industrial-tiles.json:platform_alone"
         },
         {
             "facing": "none",
             "pos": [
-                15,
-                11
+                8,
+                8
             ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
+            "tile": "industrial-tiles.json:ceiling_middle"
         },
         {
             "facing": "none",
             "pos": [
-                16,
+                9,
                 0
             ],
             "tile": "industrial-tiles.json:platform_middle"
@@ -506,63 +346,23 @@
         {
             "facing": "none",
             "pos": [
-                16,
-                2
-            ],
-            "tile": "industrial-tiles.json:platform_left"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                16,
-                3
-            ],
-            "tile": "industrial-tiles.json:pillar_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                16,
+                9,
                 4
             ],
-            "tile": "industrial-tiles.json:pillar_top"
+            "tile": "industrial-tiles.json:ground_right"
         },
         {
             "facing": "none",
             "pos": [
-                16,
-                11
+                9,
+                8
             ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
+            "tile": "industrial-tiles.json:ceiling_right"
         },
         {
             "facing": "none",
             "pos": [
-                17,
-                0
-            ],
-            "tile": "industrial-tiles.json:platform_right"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                17,
-                2
-            ],
-            "tile": "industrial-tiles.json:platform_middle"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                17,
-                11
-            ],
-            "tile": "industrial-tiles.json:interior_wall_bottom"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                18,
+                10,
                 0
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -570,7 +370,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 1
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -578,7 +378,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 2
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -586,7 +386,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 3
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -594,7 +394,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 4
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -602,7 +402,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 5
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -610,7 +410,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 6
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -618,7 +418,7 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 7
             ],
             "tile": "industrial-tiles.json:wall_right"
@@ -626,35 +426,11 @@
         {
             "facing": "none",
             "pos": [
-                18,
+                10,
                 8
             ],
             "tile": "industrial-tiles.json:wall_right"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                18,
-                9
-            ],
-            "tile": "industrial-tiles.json:wall_right"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                18,
-                10
-            ],
-            "tile": "industrial-tiles.json:wall_right"
-        },
-        {
-            "facing": "none",
-            "pos": [
-                18,
-                11
-            ],
-            "tile": "industrial-tiles.json:blank"
         }
     ],
-    "width": 19
+    "width": 11
 }

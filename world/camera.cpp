@@ -38,10 +38,9 @@ void Camera::handle_input() {
     }
 }
 
-
 void Camera::update(const Vec<float>& new_location, float dt) {
     goal = new_location;
-    physics.acceleration = (goal - physics.position) * 10.0f;
+    physics.acceleration = (goal - physics.position) * 15.0f;
 
     physics.velocity += 0.5f * physics.acceleration * dt;
     physics.position += physics.velocity * dt;

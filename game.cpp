@@ -70,7 +70,7 @@ void Game::update() {
 
                 // put the camera slightly ahead of the player
                 float L = length(player->physics.velocity);
-                Vec displacement = 8.0f * player->physics.velocity / (1.0f + L);
+                Vec displacement = 2.0f * player->physics.velocity / (1.0f + L);
                 camera.update(player->physics.position + displacement, dt);
 
                 // check for level end

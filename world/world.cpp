@@ -208,6 +208,13 @@ void World::move_to(Vec<float>& position, const Vec<int>& size, Vec<float>& velo
     }
 }
 
+Facing get_facing_at(const Level& level, const Vec<float>& pos) {
+    return level.tile_facings.at({
+        static_cast<int>(pos.x),
+        static_cast<int>(pos.y)
+    });
+}
+
 void World::load_level(const Level& level) {
     audio->load_sounds(level.sounds);
     // get the backgrounds
@@ -218,6 +225,8 @@ void World::load_level(const Level& level) {
     get_portal_details(level.tile_facings);
     active_blue_pos = blue_portal_state ? blue_portal_pos_a : blue_portal_pos_b;
     active_orange_pos = orange_portal_state ? orange_portal_pos_a : orange_portal_pos_b;
+    active_blue_facing = get_facing_at(level, active_blue_pos);
+    active_orange_facing = get_facing_at(level, active_orange_pos);
 
     // get all enemies
     for (const auto& [pos, enemy_name] : level.enemy_locations) {
